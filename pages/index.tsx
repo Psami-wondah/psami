@@ -10,7 +10,7 @@ export default function Home() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-white p-8 rounded-lg shadow-lg">
           <h1 className="text-5xl font-bold text-center text-gray-800">
-            Chris is Gay
+            Chris 🥤 is Gay
           </h1>
         </div>
       </div>
