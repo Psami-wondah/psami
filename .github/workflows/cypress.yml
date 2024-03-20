@@ -16,15 +16,12 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 6.32.9
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-          cache: 'pnpm'
 
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         with:
+          cache: "pnpm"
           # Starts web server for E2E tests - replace with your own server invocation
           # https://docs.cypress.io/guides/continuous-integration/introduction#Boot-your-server
           start: npm run dev
