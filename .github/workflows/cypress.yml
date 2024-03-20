@@ -16,6 +16,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           cache: 'pnpm'
+          
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
