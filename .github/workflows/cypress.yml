@@ -18,6 +18,7 @@ jobs:
           version: 6.32.9
       - uses: actions/setup-node@v4
         with:
+          version: "18.16.3"
           cache: 'pnpm'
 
       - name: Cypress run
