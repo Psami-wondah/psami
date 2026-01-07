@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  psami-frontend-image:
+    build: .
+    image: psami-frontend/image
+    volumes:
+      - .:/app
+
+  psami-frontend:
+    image: psami-frontend/image
+    container_name: psami-frontend-server
+    command: yarn start
+    ports:
+      - 3004:3004
+    restart: always
+    depends_on:
+      - psami-frontend-image
+
+networks:
+  web:
+    driver: bridge
