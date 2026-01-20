@@ -1,10 +1,12 @@
-FROM node:20-alpine
-
-RUN npm install -g pnpm
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY . /app
+# pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
 
-RUN pnpm install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile  # IMPORTANT: no --prod here
+
+COPY . .
 RUN pnpm build
