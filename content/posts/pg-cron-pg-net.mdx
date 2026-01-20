@@ -1,0 +1,50 @@
+---
+title: "Scheduling cron jobs with pg_cron and pg_net"
+date: "2024-02-17"
+description: "Use native Postgres scheduling and HTTP calls to automate workflows without extra servers."
+tags: ["Postgres", "Automation", "Backend"]
+cover: "https://lh3.googleusercontent.com/aida-public/AB6AXuAe-fzZwSuuIvFn4i1L3SglQ5ODeQFGKsGUvQ0E-ANr-kqdkwVvNvvFuxbZeaIEGjm4WPbNGdX1Qp2h_Vk41xGvbmqualYy_pO2tL7-3-wS3P5_JqSb0BgHDc01asrezV5n0cn-l-D0qYqvFxO3sYMhH7i3SFpV8yJfFjnyjr8LeoXydX74C4H2hdx7j3AaNWdqEuXHxRf8CNXOFP9b-VI2jM8OZriXkP4eYZSjRfH6Ugp1xHjFtzeKu7fzSz4viR3sHNpOw6-IY1B2"
+readingTime: "6 min read"
+author: "Owhondah Okechukwu Samuel"
+---
+
+Running background jobs directly in Postgres is surprisingly effective for many workloads. `pg_cron` schedules SQL at the database level, and `pg_net` can call HTTP endpoints from inside Postgres. Together they let you automate tasks without a separate worker.
+
+## Install the extensions
+
+```sql
+CREATE EXTENSION IF NOT EXISTS pg_cron;
+CREATE EXTENSION IF NOT EXISTS pg_net;
+```
+
+Make sure `pg_cron` is configured with the right database in `postgresql.conf`.
+
+## Example: nightly cleanup
+
+```sql
+SELECT cron.schedule(
+  'nightly_cleanup',
+  '0 2 * * *',
+  $$DELETE FROM audit_logs WHERE created_at < now() - interval '90 days'$$
+);
+```
+
+## Example: ping a webhook
+
+```sql
+SELECT net.http_post(
+  url := 'https://example.com/webhooks/daily-rollup',
+  headers := '{"Authorization": "Bearer token"}'::jsonb,
+  body := '{"source":"pg_cron"}'::jsonb
+);
+```
+
+## Observability tips
+
+- Store `cron.job_run_details` in a dashboard table.
+- Add a short retention policy for old runs.
+- Emit alerts for consecutive failures.
+
+## When to use this pattern
+
+If your task is data-local and short-lived, `pg_cron` is a clean fit. For long-running or CPU-heavy jobs, keep a separate worker process.

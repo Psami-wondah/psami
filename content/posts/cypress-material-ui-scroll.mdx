@@ -1,0 +1,52 @@
+---
+title: "Cypress and Material UI scroll behavior issue"
+date: "2024-01-18"
+description: "Why Cypress tests can miss MUI scroll containers and how to stabilize scrolling assertions."
+tags: ["Testing", "Cypress", "UI"]
+cover: "https://lh3.googleusercontent.com/aida-public/AB6AXuBNzd2Vz3goOCtvp2--FS6Hq4ioUVIDRpswntheE1w-Vai9PEPybxEhZyxgGDf8BWyH2Rr6LSCClfl9IyffbTfLb6UOQzbty35LocYhv9nmIbrfSshzA5kpP1x1Gs_2ZxbkYlldfNy5LpqSlsZXVplAnDPhPMkC_wz7kXfEIuo4Lp9zD9Jf9VDFIX26u8Y5Ox3JvrpxPRBQQKrSmu4cPtJrhWrxATqUeKrVdKMxCSdl-OCrHwsnygQ1qG9edTjJ2BIFMWYVb-n_G5hg"
+readingTime: "7 min read"
+author: "Owhondah Okechukwu Samuel"
+---
+
+Material UI components often render nested scroll containers. That is great for UX, but Cypress defaults can target the wrong element when you call `scrollIntoView`, leading to flaky tests. Here is a short playbook to make those tests deterministic.
+
+## Why the scroll target is wrong
+
+MUI components like `Dialog`, `Popover`, and `Autocomplete` can create internal wrappers with `overflow: auto`. Cypress will try to scroll the window when it should scroll the inner element, so the item is still not visible.
+
+## Pin the real scrollable element
+
+Find the element with `overflow` and explicitly scroll it instead of the window.
+
+```js
+cy.get("[data-testid=results-list]")
+  .scrollTo("bottom")
+  .find("[data-testid=result-row]")
+  .contains("Quarterly report")
+  .click();
+```
+
+## Disable smooth scrolling in tests
+
+Smooth scrolling can be async and time-based. For testing, set the container to instant scrolling:
+
+```css
+* {
+  scroll-behavior: auto;
+}
+```
+
+You can set this in your Cypress support file or inject it using `cy.document()`.
+
+## Prefer role-based queries
+
+Many MUI elements map to accessible roles. Use `findByRole` with `@testing-library/cypress` so Cypress can retry until the right node exists.
+
+## Checklist
+
+- Scroll the actual container, not the window.
+- Disable smooth scrolling while tests run.
+- Avoid chaining `scrollIntoView` after complex `within` blocks.
+- Add deterministic data attributes on rows or list items.
+
+Once you apply these, the scroll behavior becomes stable and the tests read like your intent.

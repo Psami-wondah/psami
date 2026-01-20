@@ -1,0 +1,49 @@
+---
+title: "How RSA works?"
+date: "2024-02-03"
+description: "A concise, practical explanation of RSA keys, encryption, and signatures."
+tags: ["Security", "Cryptography", "Basics"]
+cover: "https://lh3.googleusercontent.com/aida-public/AB6AXuAy8dLDzEb16Y7gKkUVzmeTyA90W1oVq-CVu91dVxIQrmTDBKfuekOZfgSv8UvDHzIr77W2SSvKduHx6dwBM5WpdUswRLzP0AMGJpOs3e5-B9T5D7ReqM2FiX50DM5wquAIFyEY9lms4fHCazuh97dMocJTytFXTyBKXlSMPJYb--fqTz_cDihaX7eU14EC5cebMbmq6c8KzTgSEObPPN_GUYjig1xas2oRQv9xSvP32wrTPr5oEINawF2CTihH518F9bBeuUfU2KRO"
+readingTime: "8 min read"
+author: "Owhondah Okechukwu Samuel"
+---
+
+RSA is a public key system that uses a key pair: one public, one private. The public key can encrypt data or verify signatures. The private key decrypts or signs.
+
+## The core idea
+
+RSA relies on the fact that multiplying two large primes is easy, while factoring the product back into primes is hard. That one-way gap is what keeps the private key safe.
+
+## Key generation in short
+
+1. Pick two large primes `p` and `q`.
+2. Multiply them to get `n = p * q`. This is part of the public key.
+3. Compute Euler's totient `phi(n) = (p - 1)(q - 1)`.
+4. Pick a public exponent `e` that is coprime with `phi(n)`.
+5. Compute `d` such that `e * d ≡ 1 (mod phi(n))`. This is the private exponent.
+
+## Encryption and decryption
+
+- Encrypt: `cipher = message^e mod n`
+- Decrypt: `message = cipher^d mod n`
+
+Only the private key has `d`, so only the owner can decrypt the message.
+
+## Signatures
+
+Signing flips the direction:
+
+- Sign: `signature = hash(message)^d mod n`
+- Verify: `hash(message) ?= signature^e mod n`
+
+If the check passes, the message came from the holder of the private key.
+
+## Why we do not encrypt large payloads with RSA
+
+RSA is slow and has size limits. In real systems, RSA encrypts a symmetric key and the payload is encrypted with a fast cipher like AES.
+
+## Practical takeaways
+
+- Use modern libraries and defaults (RSA-OAEP, RSA-PSS).
+- Rotate keys and set clear expiration.
+- Prefer elliptic curve algorithms for new systems when possible.

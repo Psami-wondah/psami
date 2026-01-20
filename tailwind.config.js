@@ -10,11 +10,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        inter: ["Inter"],
-        poppins: ["Poppins"],
+        display: ["var(--font-display)", "Space Grotesk", "sans-serif"],
+        sans: ["var(--font-sans)", "Noto Sans", "sans-serif"],
       },
       colors: {
-        "psami-dark": "#030712",
+        primary: "#135bec",
+        "background-light": "#f6f6f8",
+        "background-dark": "#101622",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
