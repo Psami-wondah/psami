@@ -2,11 +2,17 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-# pnpm
-RUN corepack enable && corepack prepare pnpm@latest --activate
+# Enable Yarn via Corepack (Node 20)
+RUN corepack enable
 
-COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile  # IMPORTANT: no --prod here
+# Copy dependency files first for cache
+COPY package.json yarn.lock ./
 
+# Install deps INCLUDING devDependencies
+RUN yarn install --frozen-lockfile
+
+# Copy source
 COPY . .
-RUN pnpm build
+
+# Build (TypeScript / Next.js / MDX)
+RUN yarn build
