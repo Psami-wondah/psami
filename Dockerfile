@@ -1,10 +1,10 @@
 FROM node:20-alpine
 
-# Install and link the charts
+RUN npm install -g pnpm
+
 WORKDIR /app
 
 COPY . /app
 
 RUN pnpm install
 RUN pnpm build
-
