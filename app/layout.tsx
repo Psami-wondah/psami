@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   title: "Samuel Owhondah | Frontend / Full-Stack Software Engineer",
   description:
     "Samuel Owhondah is a Frontend / Full-Stack Software Engineer building scalable, user-focused web applications.",
-  icons: { icon: "./favicon.svg" },
+  icons: { icon: "/favicon.svg" },
   authors: [
     {
       name: "Owhondah Okechukwu Samuel",

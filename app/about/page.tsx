@@ -43,6 +43,12 @@ const experience = [
 
 const projects = [
   {
+    name: "Copyyt",
+    description:
+      "Copy and share text across devices with a Chrome extension (v1.2, updated Feb 8, 2025).",
+    href: "https://copyyt.psami.com",
+  },
+  {
     name: "Rie Ticket",
     description: "Event ticketing web app (React, Paystack).",
   },
@@ -88,10 +94,10 @@ export default function AboutPage() {
         }}
         navItems={[
           { label: "Home", href: "/" },
-          { label: "Projects", href: "/about#projects" },
+          { label: "Projects", href: "/#projects" },
           { label: "Blog", href: "/blog" },
           { label: "About", href: "/about" },
-          { label: "Contact", href: "/about#contact" },
+          { label: "Contact", href: "/#contact" },
         ]}
         rightSlot={
           <>
@@ -122,7 +128,7 @@ export default function AboutPage() {
           </h1>
           <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed">
             Samuel Owhondah is a software engineer with a background in
-            Electrical and Electronics Engineering and a Master's degree in
+            Electrical and Electronics Engineering and a Master&apos;s degree in
             Computing (Software Engineering). He specializes in building
             scalable, user-focused web applications using React, Next.js,
             TypeScript, and Python-based backends. Based in the United Kingdom,
@@ -137,9 +143,7 @@ export default function AboutPage() {
 
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
           <div className="bg-white dark:bg-[#192233] p-8 rounded-xl shadow-sm border border-slate-200 dark:border-[#324467]">
-            <h2 className="text-2xl font-bold font-display mb-6">
-              Education
-            </h2>
+            <h2 className="text-2xl font-bold font-display mb-6">Education</h2>
             <div className="space-y-4 text-slate-600 dark:text-slate-300">
               <div>
                 <p className="font-semibold text-slate-900 dark:text-white">
@@ -156,17 +160,13 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="bg-white dark:bg-[#192233] p-8 rounded-xl shadow-sm border border-slate-200 dark:border-[#324467]">
-            <h2 className="text-2xl font-bold font-display mb-6">
-              Contact
-            </h2>
+            <h2 className="text-2xl font-bold font-display mb-6">Contact</h2>
             <div className="space-y-3 text-slate-600 dark:text-slate-300">
               <a
                 className="flex items-center gap-2 hover:text-primary transition-colors"
                 href="mailto:me@psami.com"
               >
-                <span className="material-symbols-outlined text-lg">
-                  mail
-                </span>
+                <span className="material-symbols-outlined text-lg">mail</span>
                 me@psami.com
               </a>
               <a
@@ -175,9 +175,7 @@ export default function AboutPage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="material-symbols-outlined text-lg">
-                  share
-                </span>
+                <span className="material-symbols-outlined text-lg">share</span>
                 Twitter / X
               </a>
               <a
@@ -186,9 +184,7 @@ export default function AboutPage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="material-symbols-outlined text-lg">
-                  code
-                </span>
+                <span className="material-symbols-outlined text-lg">code</span>
                 GitHub
               </a>
               <a
@@ -197,9 +193,7 @@ export default function AboutPage() {
                 target="_blank"
                 rel="noreferrer"
               >
-                <span className="material-symbols-outlined text-lg">
-                  work
-                </span>
+                <span className="material-symbols-outlined text-lg">work</span>
                 LinkedIn
               </a>
             </div>
@@ -237,9 +231,21 @@ export default function AboutPage() {
                 key={project.name}
                 className="bg-white dark:bg-[#192233] p-6 rounded-xl border border-slate-200 dark:border-[#324467]"
               >
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-2">
-                  {project.name}
-                </h3>
+                <div className="flex items-center justify-between gap-4 mb-2">
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
+                    {project.name}
+                  </h3>
+                  {project.href && (
+                    <a
+                      className="text-sm font-semibold text-primary hover:underline underline-offset-4"
+                      href={project.href}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Live site
+                    </a>
+                  )}
+                </div>
                 <p className="text-slate-600 dark:text-slate-300">
                   {project.description}
                 </p>
@@ -270,11 +276,11 @@ export default function AboutPage() {
             alternate_email
           </span>
           <h2 className="font-display text-3xl font-black dark:text-white">
-            Let's build something together
+            Let&apos;s build something together
           </h2>
           <p className="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
             Open to interesting roles and freelance projects. If you have an
-            idea or need help shipping a product, let's talk.
+            idea or need help shipping a product, let&apos;s talk.
           </p>
           <div className="flex flex-wrap justify-center gap-4 mt-4">
             <a

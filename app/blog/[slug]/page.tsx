@@ -4,6 +4,7 @@ import SiteFooter from "@/components/site-footer";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { formatDate } from "@/lib/format";
 import MdxRenderer from "@/lib/mdx";
+import Image from "next/image";
 
 type BlogPostPageProps = {
   params: { slug: string };
@@ -142,8 +143,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                 </h4>
                 <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
                   Samuel Owhondah is a software engineer with a background in
-                  Electrical and Electronics Engineering and a Master's degree
-                  in Computing (Software Engineering). He specializes in
+                  Electrical and Electronics Engineering and a Master&apos;s
+                  degree in Computing (Software Engineering). He specializes in
                   building scalable, user-focused web applications using React,
                   Next.js, TypeScript, and Python-based backends.
                 </p>
@@ -202,8 +203,7 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                       label: "LinkedIn",
                       description: "Professional networking & career",
                       icon: "work",
-                      href:
-                        "https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/",
+                      href: "https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/",
                     },
                     {
                       label: "Twitter / X",
@@ -249,7 +249,8 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
 
               <div className="relative h-[200px] w-full rounded-xl overflow-hidden grayscale opacity-80 hover:grayscale-0 transition-all">
-                <img
+                <Image
+                  layout="fill"
                   alt="Map view of developer location"
                   className="w-full h-full object-cover"
                   src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2cRZ9h3606uXR_-4vc7Q0KJzM3acmfhfZEeN6xHLLfzAtMm8gU2_qwdEG0IxNEtgsNssHyfYriJm1nvgl3-vrnFStMS7WJHfhZxeogDvTDJo_7tRCnGd9h1hjZ8_O8Yn6NYlDzizKvbHTjdu_s0BOoyCQq6kJ3CRgE4Igd0FQvF3HLHSsPU_xVkUiX9nWUhFgQQCtckvUNWLE2WsGIY4nylQlj3mjtTsf0TBR4fjMhrJ2QIhZhb0jmSKMOAgz5k9nUqjNagDmLrul"

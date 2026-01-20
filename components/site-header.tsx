@@ -22,11 +22,7 @@ type SiteHeaderProps = {
   rightSlot?: React.ReactNode;
 };
 
-const SiteHeader = ({
-  brand,
-  navItems,
-  rightSlot,
-}: SiteHeaderProps) => {
+const SiteHeader = ({ brand, navItems, rightSlot }: SiteHeaderProps) => {
   const pathname = usePathname();
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -35,8 +31,7 @@ const SiteHeader = ({
 
   const baseClasses =
     "w-full border-b border-slate-200 dark:border-slate-800 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50";
-  const containerClasses =
-    "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3";
+  const containerClasses = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3";
 
   return (
     <header className={baseClasses}>
@@ -59,7 +54,7 @@ const SiteHeader = ({
                 "text-sm font-medium transition-colors py-1",
                 isActive(item.href)
                   ? "text-primary font-bold border-b-2 border-primary"
-                  : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary"
+                  : "text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary",
               )}
             >
               {item.label}
@@ -68,7 +63,7 @@ const SiteHeader = ({
         </nav>
         <div className="flex items-center gap-3">
           {rightSlot}
-          <ThemeToggle mode="single" />
+          <ThemeToggle />
         </div>
       </div>
     </header>

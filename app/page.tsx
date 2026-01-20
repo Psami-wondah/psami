@@ -8,6 +8,15 @@ import { formatDate } from "@/lib/format";
 
 const projects = [
   {
+    title: "Copyyt",
+    description:
+      "Copy text on one device and access it instantly on another with a simple Chrome extension workflow.",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuBNzd2Vz3goOCtvp2--FS6Hq4ioUVIDRpswntheE1w-Vai9PEPybxEhZyxgGDf8BWyH2Rr6LSCClfl9IyffbTfLb6UOQzbty35LocYhv9nmIbrfSshzA5kpP1x1Gs_2ZxbkYlldfNy5LpqSlsZXVplAnDPhPMkC_wz7kXfEIuo4Lp9zD9Jf9VDFIX26u8Y5Ox3JvrpxPRBQQKrSmu4cPtJrhWrxATqUeKrVdKMxCSdl-OCrHwsnygQ1qG9edTjJ2BIFMWYVb-n_G5hg",
+    icon: "content_copy",
+    tags: ["Chrome Extension", "Productivity", "Web"],
+  },
+  {
     title: "E-commerce Engine",
     description:
       "Full-stack marketplace with real-time inventory, secure Stripe payments, and admin dashboard.",
@@ -110,10 +119,10 @@ export default function Home() {
                   <span className="text-primary">precision</span> and code.
                 </h1>
                 <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl">
-                  Hi, I'm Samuel, a Frontend / Full-Stack Software Engineer
-                  specializing in high-performance web applications and
-                  scalable system architecture. I turn complex problems into
-                  elegant code.
+                  Hi, I&apos;m Samuel, a Frontend / Full-Stack Software Engineer
+                  specializing in high-performance web applications and scalable
+                  system architecture. I turn complex problems into elegant
+                  code.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4">
@@ -161,7 +170,8 @@ export default function Home() {
                         <br />
                         &nbsp;&nbsp;name: &apos;Samuel Owhondah&apos;,
                         <br />
-                        &nbsp;&nbsp;role: &apos;Frontend / Full-Stack Engineer&apos;,
+                        &nbsp;&nbsp;role: &apos;Frontend / Full-Stack
+                        Engineer&apos;,
                         <br />
                         &nbsp;&nbsp;focus: [&apos;Performance&apos;,
                         &apos;Scalability&apos;],
@@ -223,14 +233,17 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="mb-24 grid grid-cols-1 lg:grid-cols-3 gap-12" id="blog">
+        <section
+          className="mb-24 grid grid-cols-1 lg:grid-cols-3 gap-12"
+          id="blog"
+        >
           <div className="lg:col-span-1">
             <h2 className="font-display text-3xl font-bold dark:text-white mb-4">
               Latest Insights
             </h2>
             <p className="text-slate-600 dark:text-slate-400 mb-8">
-              Writing about software architecture, career growth, and the
-              future of web development.
+              Writing about software architecture, career growth, and the future
+              of web development.
             </p>
             <Link
               className="flex items-center gap-2 text-primary font-bold hover:gap-3 transition-all"
