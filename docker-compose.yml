@@ -10,7 +10,7 @@ services:
   psami-frontend:
     image: psami-frontend/image
     container_name: psami-frontend-server
-    command: yarn start
+    command: pnpm start
     ports:
       - 3004:3004
     restart: always

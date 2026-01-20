@@ -5,6 +5,6 @@ WORKDIR /app
 
 COPY . /app
 
-RUN yarn install
-RUN yarn build
+RUN pnpm install
+RUN pnpm build
 
