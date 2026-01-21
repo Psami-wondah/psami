@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import GiscusComments from "@/components/giscus-comments";
 import { getAllPosts, getPostBySlug } from "@/lib/posts";
 import { formatDate } from "@/lib/format";
 import MdxRenderer from "@/lib/mdx";
@@ -180,6 +181,12 @@ export default function BlogPostPage({ params }: BlogPostPageProps) {
                     Email
                   </a>
                 </div>
+              </div>
+              <div className="mt-10 border-t border-slate-200 dark:border-[#324467] pt-6">
+                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
+                  Comments
+                </h4>
+                <GiscusComments />
               </div>
             </article>
             <div className="flex flex-col gap-10">
