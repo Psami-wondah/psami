@@ -37,7 +37,7 @@ export const siteLinks = {
   email: "mailto:me@psami.com",
   github: "https://github.com/Psami-wondah",
   linkedin: "https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/",
-  twitter: "https://x.com/psami",
+  twitter: "https://x.com/psami_",
   resume: "/resume.pdf",
 } as const;
 

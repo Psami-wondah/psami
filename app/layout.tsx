@@ -24,13 +24,14 @@ export const metadata: Metadata = {
   authors: [
     {
       name: "Okechukwu Samuel Owhondah",
-      url: "https://x.com/psami",
+      url: "https://x.com/psami_",
     },
   ],
   creator: "Okechukwu Samuel Owhondah",
   publisher: "Okechukwu Samuel Owhondah",
   openGraph: {
-    title: "Okechukwu Samuel Owhondah | Frontend / Full-Stack Software Engineer",
+    title:
+      "Okechukwu Samuel Owhondah | Frontend / Full-Stack Software Engineer",
     description:
       "Frontend / Full-Stack Software Engineer specializing in React, Next.js, TypeScript, and Python-based backends.",
     type: "website",
@@ -40,7 +41,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     creator: "@psami",
-    title: "Okechukwu Samuel Owhondah | Frontend / Full-Stack Software Engineer",
+    title:
+      "Okechukwu Samuel Owhondah | Frontend / Full-Stack Software Engineer",
     description:
       "Frontend / Full-Stack Software Engineer specializing in React, Next.js, TypeScript, and Python-based backends.",
   },
@@ -52,10 +54,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${notoSans.variable} ${spaceGrotesk.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${notoSans.variable} ${spaceGrotesk.variable}`}
+    >
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange={false}>
-          <a className="skip-link" href="#main-content">Skip to content</a>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange={false}
+        >
+          <a className="skip-link" href="#main-content">
+            Skip to content
+          </a>
           <SiteHeader />
           {children}
           <SiteFooter />
