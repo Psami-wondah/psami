@@ -18,6 +18,31 @@ export type Post = {
   content: string;
 };
 
+export type PostHeading = {
+  level: 2 | 3;
+  text: string;
+  id: string;
+};
+
+export const slugifyHeading = (value: string) =>
+  value
+    .toLowerCase()
+    .trim()
+    .replace(/[`*_]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+
+export const getPostHeadings = (content: string): PostHeading[] =>
+  content
+    .split("\n")
+    .map((line) => {
+      const match = /^(##|###)\s+(.+)$/.exec(line.trim());
+      if (!match) return null;
+      const text = match[2].replace(/[`*_]/g, "").trim();
+      return { level: match[1].length as 2 | 3, text, id: slugifyHeading(text) };
+    })
+    .filter((heading): heading is PostHeading => heading !== null);
+
 const postsDirectory = path.join(process.cwd(), "content/posts");
 
 const normalizeSlug = (slug: string) => slug.replace(/\.mdx$/, "");

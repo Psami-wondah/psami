@@ -1,281 +1,93 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import SiteHeader from "@/components/site-header";
-import SiteFooter from "@/components/site-footer";
+import ArticleEnhancements from "@/components/article-enhancements";
 import GiscusComments from "@/components/giscus-comments";
-import { getAllPosts, getPostBySlug } from "@/lib/posts";
+import { ArrowRight, ArrowUpRight } from "@/components/icons";
+import ShareButton from "@/components/share-button";
 import { formatDate } from "@/lib/format";
 import MdxRenderer from "@/lib/mdx";
-import Image from "next/image";
+import { getAllPosts, getPostBySlug, getPostHeadings } from "@/lib/posts";
+import { siteLinks } from "@/lib/site-data";
 
-type BlogPostPageProps = {
-  params: { slug: string };
-};
+type BlogPostPageProps = { params: { slug: string } };
 
-export const generateStaticParams = async () => {
-  return getAllPosts().map((post) => ({ slug: post.slug }));
-};
+export const generateStaticParams = async () => getAllPosts().map((post) => ({ slug: post.slug }));
 
-export const generateMetadata = async ({ params }: BlogPostPageProps) => {
+export const generateMetadata = async ({ params }: BlogPostPageProps): Promise<Metadata> => {
   const post = getPostBySlug(params.slug);
-  if (!post) {
-    return { title: "Post not found" };
-  }
-
+  if (!post) return { title: "Post not found" };
   return {
-    title: post.frontmatter.title,
+    title: `${post.frontmatter.title} | Okechukwu Samuel Owhondah`,
     description: post.frontmatter.description,
-    authors: [
-      {
-        name: "Owhondah Okechukwu Samuel",
-        url: "https://x.com/psami",
-      },
-    ],
-    openGraph: {
-      title: post.frontmatter.title,
-      description: post.frontmatter.description,
-      type: "article",
-      authors: ["Owhondah Okechukwu Samuel"],
-      images: post.frontmatter.cover
-        ? [
-            {
-              url: post.frontmatter.cover,
-              width: 1200,
-              height: 630,
-              alt: post.frontmatter.title,
-            },
-          ]
-        : undefined,
-    },
-    twitter: {
-      card: "summary_large_image",
-      creator: "@psami",
-      title: post.frontmatter.title,
-      description: post.frontmatter.description,
-      images: post.frontmatter.cover ? [post.frontmatter.cover] : undefined,
-    },
+    authors: [{ name: "Okechukwu Samuel Owhondah", url: siteLinks.twitter }],
+    openGraph: { title: post.frontmatter.title, description: post.frontmatter.description, type: "article", publishedTime: post.frontmatter.date, authors: ["Okechukwu Samuel Owhondah"] },
+    twitter: { card: "summary", creator: "@psami", title: post.frontmatter.title, description: post.frontmatter.description },
   };
 };
 
 export default function BlogPostPage({ params }: BlogPostPageProps) {
   const post = getPostBySlug(params.slug);
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
+  const allPosts = getAllPosts();
+  const index = allPosts.findIndex((item) => item.slug === post.slug);
+  const newer = index > 0 ? allPosts[index - 1] : null;
+  const older = index < allPosts.length - 1 ? allPosts[index + 1] : null;
+  const headings = getPostHeadings(post.content);
+  const canonicalUrl = `https://psami.com/blog/${post.slug}`;
 
   return (
-    <div>
-      <SiteHeader
-        brand={{
-          name: "Psami",
-          accent: ".",
-          icon: (
-            <span className="material-symbols-outlined text-3xl font-bold">
-              terminal
-            </span>
-          ),
-        }}
-        navItems={[
-          { label: "Home", href: "/" },
-          { label: "Projects", href: "/#projects" },
-          { label: "Blog", href: "/blog" },
-          { label: "About", href: "/about" },
-          { label: "Contact", href: "/#contact" },
-        ]}
-        rightSlot={
-          <>
-            <a
-              className="hidden sm:flex items-center gap-2 border border-primary/30 text-primary px-4 py-1.5 rounded-lg text-sm font-bold transition-all font-display hover:bg-primary/5"
-              href="/resume.pdf"
-              download
-            >
-              <span className="material-symbols-outlined text-lg">
-                download
-              </span>
-              Resume
-            </a>
-            <a
-              className="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all font-display"
-              href="mailto:me@psami.com"
-            >
-              Hire Me
-            </a>
-          </>
-        }
-      />
+    <main id="main-content">
+      <ArticleEnhancements />
+      <article>
+        <header className="relative overflow-hidden border-b border-line pb-14 pt-14 sm:pb-20 sm:pt-20">
+          <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+          <div className="site-container relative max-w-[1100px]">
+            <Link href="/blog" className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[.16em] text-muted transition hover:text-accent">← All notes</Link>
+            <div className="mt-10 flex flex-wrap gap-2">{post.frontmatter.tags.map((tag) => <span className="tech-tag" key={tag}>{tag}</span>)}</div>
+            <h1 className="mt-6 max-w-5xl text-balance font-display text-[clamp(2.7rem,8vw,7rem)] font-semibold leading-[.96] tracking-[-.06em]">{post.frontmatter.title}</h1>
+            <p className="mt-7 max-w-3xl text-base leading-8 text-muted sm:text-xl">{post.frontmatter.description}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-2 font-mono text-[11px] uppercase tracking-wider text-muted"><span>{formatDate(post.frontmatter.date)}</span><span>·</span><span>{post.frontmatter.readingTime || "7 min read"}</span><span>·</span><span>{post.frontmatter.author || "Okechukwu Samuel Owhondah"}</span></div>
+          </div>
+        </header>
 
-      <main className="flex-grow">
-        <div className="max-w-[1200px] mx-auto px-6 lg:px-10 py-12 lg:py-20">
-          <div className="flex flex-col items-center text-center mb-16">
-            <div className="inline-flex items-center gap-3 text-xs uppercase tracking-[0.3em] text-primary font-bold mb-4">
-              <span className="h-1 w-10 bg-primary rounded-full"></span>
-              Article
+        <div className="site-container grid max-w-[1100px] gap-12 py-14 lg:grid-cols-[minmax(0,720px)_220px] lg:items-start lg:gap-20 lg:py-20">
+          <div className="min-w-0">
+            <div className="article-prose"><MdxRenderer source={post.content} /></div>
+
+            <div className="mt-14 flex flex-wrap items-center gap-3 border-y border-line py-6">
+              <span className="mr-auto font-mono text-[11px] uppercase tracking-wider text-muted">Share this note</span>
+              <ShareButton title={post.frontmatter.title} url={canonicalUrl} />
+              <a className="article-action" href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(canonicalUrl)}`} target="_blank" rel="noreferrer">LinkedIn</a>
+              <a className="article-action" href={`https://x.com/intent/post?text=${encodeURIComponent(post.frontmatter.title)}&url=${encodeURIComponent(canonicalUrl)}`} target="_blank" rel="noreferrer">X / Twitter</a>
             </div>
-            <h1 className="text-slate-900 dark:text-white tracking-tight text-[42px] lg:text-[56px] font-bold leading-tight pb-4 font-display">
-              {post.frontmatter.title}
-            </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-lg max-w-[760px] font-normal leading-relaxed px-4">
-              {post.frontmatter.description}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 mt-6 text-sm text-slate-500 dark:text-slate-400">
-              <span>{formatDate(post.frontmatter.date)}</span>
-              <span className="text-slate-300 dark:text-slate-600">•</span>
-              <span>By {post.frontmatter.author || "Samuel Owhondah"}</span>
-              <span className="text-slate-300 dark:text-slate-600">•</span>
-              <span>{post.frontmatter.readingTime || "7 min read"}</span>
-            </div>
-            <div className="flex flex-wrap justify-center gap-2 mt-6">
-              {post.frontmatter.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="px-3 py-1 rounded-full bg-slate-200 dark:bg-[#232f48] text-slate-700 dark:text-slate-300 text-xs font-medium"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
+
+            <section className="mt-12 rounded-2xl border border-line bg-surface/45 p-6 sm:p-8">
+              <p className="eyebrow">About the author</p>
+              <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight">Okechukwu Samuel Owhondah</h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">Frontend and full-stack software engineer building scalable, user-focused web applications with React, Next.js, TypeScript, and Python-based backends.</p>
+              <div className="mt-5 flex flex-wrap gap-4 text-sm font-semibold text-accent"><a href={siteLinks.github} target="_blank" rel="noreferrer">GitHub</a><a href={siteLinks.linkedin} target="_blank" rel="noreferrer">LinkedIn</a><a href={siteLinks.email}>Email</a></div>
+            </section>
+
+            <nav className="mt-12 grid gap-4 sm:grid-cols-2" aria-label="Article navigation">
+              {older ? <Link className="post-nav-card" href={`/blog/${older.slug}`}><span>← Older note</span><strong>{older.frontmatter.title}</strong></Link> : <div />}
+              {newer && <Link className="post-nav-card text-right" href={`/blog/${newer.slug}`}><span>Newer note →</span><strong>{newer.frontmatter.title}</strong></Link>}
+            </nav>
+
+            <section className="mt-16 border-t border-line pt-10">
+              <h2 className="font-display text-3xl font-semibold tracking-tight">Discussion</h2>
+              <p className="mt-3 text-sm text-muted">Questions, corrections, and thoughtful additions are welcome.</p>
+              <div className="mt-8"><GiscusComments /></div>
+            </section>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-            <article className="bg-white dark:bg-[#192233] p-8 rounded-xl shadow-sm border border-slate-200 dark:border-[#324467]">
-              <MdxRenderer source={post.content} />
-              <div className="mt-10 border-t border-slate-200 dark:border-[#324467] pt-6">
-                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-3">
-                  About the author
-                </h4>
-                <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
-                  Samuel Owhondah is a software engineer with a background in
-                  Electrical and Electronics Engineering and a Master&apos;s
-                  degree in Computing (Software Engineering). He specializes in
-                  building scalable, user-focused web applications using React,
-                  Next.js, TypeScript, and Python-based backends.
-                </p>
-                <div className="flex flex-wrap gap-4 mt-4 text-sm">
-                  <a
-                    className="text-primary hover:underline underline-offset-4"
-                    href="https://x.com/psami"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Twitter / X
-                  </a>
-                  <a
-                    className="text-primary hover:underline underline-offset-4"
-                    href="https://github.com/Psami-wondah"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    GitHub
-                  </a>
-                  <a
-                    className="text-primary hover:underline underline-offset-4"
-                    href="https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    LinkedIn
-                  </a>
-                  <a
-                    className="text-primary hover:underline underline-offset-4"
-                    href="mailto:me@psami.com"
-                  >
-                    Email
-                  </a>
-                </div>
-              </div>
-              <div className="mt-10 border-t border-slate-200 dark:border-[#324467] pt-6">
-                <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-4">
-                  Comments
-                </h4>
-                <GiscusComments />
-              </div>
-            </article>
-            <div className="flex flex-col gap-10">
-              <div>
-                <h3 className="text-2xl font-bold font-display mb-6">
-                  Let&apos;s Connect
-                </h3>
-                <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg">
-                  Enjoyed the article? Reach out or follow along for more
-                  practical engineering notes and deep dives.
-                </p>
-                <div className="grid grid-cols-1 gap-4">
-                  {[
-                    {
-                      label: "GitHub",
-                      description: "Check out my latest repositories",
-                      icon: "code",
-                      href: "https://github.com/Psami-wondah",
-                    },
-                    {
-                      label: "LinkedIn",
-                      description: "Professional networking & career",
-                      icon: "work",
-                      href: "https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/",
-                    },
-                    {
-                      label: "Twitter / X",
-                      description: "Daily tech thoughts and updates",
-                      icon: "alternate_email",
-                      href: "https://x.com/psami",
-                    },
-                  ].map((item) => (
-                    <a
-                      key={item.label}
-                      className="flex items-center gap-4 p-4 rounded-lg bg-white dark:bg-[#192233] border border-slate-200 dark:border-[#324467] hover:border-primary dark:hover:border-primary transition-all group"
-                      href={item.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <div className="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
-                        <span className="material-symbols-outlined">
-                          {item.icon}
-                        </span>
-                      </div>
-                      <div>
-                        <p className="font-bold text-slate-900 dark:text-white">
-                          {item.label}
-                        </p>
-                        <p className="text-sm text-slate-500 dark:text-slate-400">
-                          {item.description}
-                        </p>
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-
-              <div className="p-6 rounded-xl border-2 border-dashed border-primary/30 bg-primary/5">
-                <div className="flex items-center gap-3 mb-2 text-primary">
-                  <span className="material-symbols-outlined">verified</span>
-                  <span className="font-bold">Available for Work</span>
-                </div>
-                <p className="text-slate-600 dark:text-slate-400 text-sm">
-                  I am currently open to freelance projects and full-time senior
-                  developer roles. Let&apos;s build something amazing together.
-                </p>
-              </div>
-
-              <div className="relative h-[200px] w-full rounded-xl overflow-hidden grayscale opacity-80 hover:grayscale-0 transition-all">
-                <Image
-                  layout="fill"
-                  alt="Map view of developer location"
-                  className="w-full h-full object-cover"
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2cRZ9h3606uXR_-4vc7Q0KJzM3acmfhfZEeN6xHLLfzAtMm8gU2_qwdEG0IxNEtgsNssHyfYriJm1nvgl3-vrnFStMS7WJHfhZxeogDvTDJo_7tRCnGd9h1hjZ8_O8Yn6NYlDzizKvbHTjdu_s0BOoyCQq6kJ3CRgE4Igd0FQvF3HLHSsPU_xVkUiX9nWUhFgQQCtckvUNWLE2WsGIY4nylQlj3mjtTsf0TBR4fjMhrJ2QIhZhb0jmSKMOAgz5k9nUqjNagDmLrul"
-                />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="bg-primary text-white p-2 rounded-full shadow-xl">
-                    <span className="material-symbols-outlined">
-                      location_on
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <aside className="hidden lg:block lg:sticky lg:top-28">
+            {headings.length > 0 && <nav aria-label="Table of contents"><p className="eyebrow">On this page</p><ol className="mt-5 space-y-3">{headings.map((heading) => <li key={heading.id} className={heading.level === 3 ? "pl-3" : ""}><a className="text-xs leading-5 text-muted transition hover:text-accent" href={`#${heading.id}`}>{heading.text}</a></li>)}</ol></nav>}
+            <div className="mt-9 border-t border-line pt-6"><a className="inline-flex items-center gap-2 text-sm font-semibold text-accent" href={siteLinks.email}>Discuss a project<ArrowUpRight className="h-4 w-4" /></a></div>
+          </aside>
         </div>
-      </main>
-
-      <SiteFooter variant="post" />
-    </div>
+      </article>
+      <div className="site-container max-w-[1100px] pb-20"><Link className="inline-flex items-center gap-2 text-sm font-semibold text-accent" href="/blog">Browse all notes<ArrowRight className="h-4 w-4" /></Link></div>
+    </main>
   );
 }

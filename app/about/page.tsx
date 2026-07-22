@@ -1,326 +1,105 @@
-import SiteHeader from "@/components/site-header";
-import SiteFooter from "@/components/site-footer";
+import type { Metadata } from "next";
+import ContactCta from "@/components/contact-cta";
+import ExperienceList from "@/components/experience-list";
+import ProjectShowcase from "@/components/project-showcase";
+import Reveal from "@/components/reveal";
+import SectionHeading from "@/components/section-heading";
+import { capabilities, education, projects } from "@/lib/site-data";
 
-const experience = [
-  {
-    title: "Frontend Engineer — Zimmerman B.V (Remote, Netherlands)",
-    points: [
-      "React + TypeScript frontend development",
-      "Data visualization with Apache ECharts & D3",
-      "Auth0 OAuth integration",
-      "CMS integration (Strapi, i18n)",
-      "End-to-end testing with Cypress",
-      "Performance optimization using Redis & LoopBack",
-    ],
-  },
-  {
-    title: "Full-Stack Engineer — Techsemester (Remote, Nigeria)",
-    points: [
-      "React + Django full-stack development",
-      "Google authentication & password login",
-      "Firebase Cloud Messaging notifications",
-      "Dockerized microservices on AWS EC2",
-      "CI/CD with GitHub Actions",
-    ],
-  },
-  {
-    title: "Full-Stack Engineer — Alajo (Lagos, Nigeria)",
-    points: [
-      "Live location tracking with Google Maps & Firebase",
-      "Admin dashboards (React, Next.js)",
-      "Data visualization (Chart.js)",
-      "SMS notifications & USSD services",
-    ],
-  },
-  {
-    title: "Contract Roles",
-    points: [
-      "MyQuba — Next.js SSR & Docker deployments",
-      "Duduzili — Django APIs & WebSocket real-time features",
-    ],
-  },
-];
-
-const projects = [
-  {
-    name: "Copyyt",
-    description:
-      "Copy and share text across devices with a Chrome extension (v1.2, updated Feb 8, 2025).",
-    href: "https://copyyt.psami.com",
-  },
-  {
-    name: "Rie Ticket",
-    description: "Event ticketing web app (React, Paystack).",
-  },
-  {
-    name: "Billza",
-    description: "Utility & bill payment platform (Django, Monnify, Tiqwa).",
-  },
-];
-
-const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "JavaScript",
-  "Django",
-  "FastAPI",
-  "NestJS",
-  "Node.js",
-  "PostgreSQL",
-  "MongoDB",
-  "Tailwind CSS",
-  "Redux Toolkit",
-  "Recoil",
-  "Docker",
-  "GitHub Actions",
-  "AWS",
-  "Data visualization",
-  "System design",
-];
+export const metadata: Metadata = {
+  title: "About Okechukwu Samuel Owhondah | Software Engineer",
+  description: "The experience, approach, and technical capabilities behind Okechukwu Samuel Owhondah's frontend and full-stack engineering work.",
+};
 
 export default function AboutPage() {
   return (
-    <div>
-      <SiteHeader
-        brand={{
-          name: "Psami",
-          accent: ".",
-          icon: (
-            <span className="material-symbols-outlined text-3xl font-bold">
-              terminal
-            </span>
-          ),
-        }}
-        navItems={[
-          { label: "Home", href: "/" },
-          { label: "Projects", href: "/#projects" },
-          { label: "Blog", href: "/blog" },
-          { label: "About", href: "/about" },
-          { label: "Contact", href: "/#contact" },
-        ]}
-        rightSlot={
-          <>
-            <a
-              className="hidden sm:flex items-center gap-2 border border-primary/30 text-primary px-4 py-1.5 rounded-lg text-sm font-bold transition-all font-display hover:bg-primary/5"
-              href="/resume.pdf"
-              download
-            >
-              <span className="material-symbols-outlined text-lg">
-                download
-              </span>
-              Resume
-            </a>
-            <a
-              className="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-lg text-sm font-bold transition-all font-display"
-              href="mailto:me@psami.com"
-            >
-              Hire Me
-            </a>
-          </>
-        }
-      />
-
-      <main className="max-w-6xl mx-auto px-6 lg:px-10 py-12 lg:py-20">
-        <section className="text-center mb-16">
-          <h1 className="text-slate-900 dark:text-white tracking-tight text-[42px] lg:text-[56px] font-bold leading-tight pb-4 font-display">
-            About Samuel
+    <main id="main-content">
+      <section className="relative overflow-hidden pb-20 pt-16 sm:pb-28 sm:pt-24">
+        <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
+        <div className="site-container relative">
+          <p className="eyebrow">About / Okechukwu Samuel Owhondah</p>
+          <h1 className="mt-7 max-w-6xl text-balance font-display text-[clamp(3.2rem,9vw,8.5rem)] font-semibold leading-[.92] tracking-[-.065em] text-strong">
+            Engineer by practice. <span className="text-accent">Problem solver</span> by instinct.
           </h1>
-          <p className="text-slate-600 dark:text-slate-400 text-lg max-w-3xl mx-auto leading-relaxed">
-            Samuel Owhondah is a software engineer with a background in
-            Electrical and Electronics Engineering and a Master&apos;s degree in
-            Computing (Software Engineering). He specializes in building
-            scalable, user-focused web applications using React, Next.js,
-            TypeScript, and Python-based backends. Based in the United Kingdom,
-            originally from Nigeria.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-6 text-sm text-slate-500 dark:text-slate-400">
-            <span>Frontend / Full-Stack Software Engineer</span>
-            <span className="text-slate-300 dark:text-slate-600">•</span>
-            <span>United Kingdom</span>
-          </div>
-        </section>
-
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-16">
-          <div className="bg-white dark:bg-[#192233] p-8 rounded-xl shadow-sm border border-slate-200 dark:border-[#324467]">
-            <h2 className="text-2xl font-bold font-display mb-6">Education</h2>
-            <div className="space-y-4 text-slate-600 dark:text-slate-300">
-              <div>
-                <p className="font-semibold text-slate-900 dark:text-white">
-                  MSc, Computing (Software Engineering)
-                </p>
-                <p>University of Northampton, UK</p>
-              </div>
-              <div>
-                <p className="font-semibold text-slate-900 dark:text-white">
-                  BEng, Electrical & Electronics Engineering
-                </p>
-                <p>Federal University of Technology, Owerri, Nigeria</p>
-              </div>
+          <div className="mt-10 grid gap-8 border-t border-line pt-8 md:grid-cols-[.85fr_1.15fr] md:gap-16">
+            <p className="font-mono text-xs uppercase tracking-[.16em] text-muted">Based in the United Kingdom<br />Originally from Nigeria</p>
+            <div className="space-y-5 text-base leading-8 text-muted sm:text-lg">
+              <p>I&apos;m Okechukwu Samuel Owhondah, a frontend and full-stack software engineer interested in the point where product clarity and technical depth meet.</p>
+              <p>My work has moved between data-rich React interfaces, real-time product features, Python services, third-party integrations, and the infrastructure that gets them safely into users&apos; hands.</p>
+              <p>An earlier foundation in Electrical and Electronics Engineering still shapes how I think: understand the system, find the signal, and make the whole thing easier to reason about.</p>
             </div>
           </div>
-          <div className="bg-white dark:bg-[#192233] p-8 rounded-xl shadow-sm border border-slate-200 dark:border-[#324467]">
-            <h2 className="text-2xl font-bold font-display mb-6">Contact</h2>
-            <div className="space-y-3 text-slate-600 dark:text-slate-300">
-              <a
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-                href="mailto:me@psami.com"
-              >
-                <span className="material-symbols-outlined text-lg">mail</span>
-                me@psami.com
-              </a>
-              <a
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-                href="https://x.com/psami"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="material-symbols-outlined text-lg">share</span>
-                Twitter / X
-              </a>
-              <a
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-                href="https://github.com/Psami-wondah"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="material-symbols-outlined text-lg">code</span>
-                GitHub
-              </a>
-              <a
-                className="flex items-center gap-2 hover:text-primary transition-colors"
-                href="https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <span className="material-symbols-outlined text-lg">work</span>
-                LinkedIn
-              </a>
+        </div>
+      </section>
+
+      <section className="section-space border-y border-line bg-surface/35">
+        <div className="site-container grid gap-14 lg:grid-cols-[.65fr_1.35fr] lg:gap-24">
+          <Reveal><SectionHeading eyebrow="Philosophy" title="The interface is part of the system." description="I care about the details users notice and the architecture they never should have to." /></Reveal>
+          <Reveal delay={80}>
+            <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+              {[
+                ["Clarity", "Make state, intent, and next actions obvious."],
+                ["Performance", "Treat speed and responsiveness as product behavior."],
+                ["Resilience", "Design graceful paths through failure and change."],
+                ["Ownership", "Follow the problem from discovery to production."],
+              ].map(([title, copy], index) => (
+                <article key={title} className="bg-canvas p-6 sm:p-8"><span className="font-mono text-xs text-accent">0{index + 1}</span><h3 className="mt-8 font-display text-2xl font-semibold tracking-tight">{title}</h3><p className="mt-3 text-sm leading-7 text-muted">{copy}</p></article>
+              ))}
             </div>
-          </div>
-        </section>
+          </Reveal>
+        </div>
+      </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold font-display mb-6">
-            Professional Experience
-          </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {experience.map((role) => (
-              <div
-                key={role.title}
-                className="bg-white dark:bg-[#192233] p-6 rounded-xl border border-slate-200 dark:border-[#324467]"
-              >
-                <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-4">
-                  {role.title}
-                </h3>
-                <ul className="list-disc pl-5 text-slate-600 dark:text-slate-300 space-y-2">
-                  {role.points.map((point) => (
-                    <li key={point}>{point}</li>
-                  ))}
-                </ul>
-              </div>
+      <section className="section-space">
+        <div className="site-container grid gap-14 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
+          <Reveal><div className="lg:sticky lg:top-28"><SectionHeading eyebrow="Career timeline" title="Work built across disciplines." description="From complex charts and authentication flows to real-time location systems and deployment pipelines." /></div></Reveal>
+          <ExperienceList />
+        </div>
+      </section>
+
+      <section className="section-space border-y border-line bg-surface/35">
+        <div className="site-container">
+          <Reveal><SectionHeading eyebrow="Education" title="Two ways of thinking about systems." /></Reveal>
+          <div className="mt-10 grid gap-5 md:grid-cols-2">
+            {education.map((item, index) => (
+              <Reveal key={item.degree} delay={index * 70}>
+                <article className="h-full rounded-2xl border border-line bg-canvas p-7 sm:p-9">
+                  <span className="font-mono text-xs text-accent">0{index + 1} / DEGREE</span>
+                  <h3 className="mt-8 font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">{item.degree}</h3>
+                  <p className="mt-5 text-sm leading-7 text-muted">{item.school}<br />{item.location}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-16" id="projects">
-          <h2 className="text-3xl font-bold font-display mb-6">Projects</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {projects.map((project) => (
-              <div
-                key={project.name}
-                className="bg-white dark:bg-[#192233] p-6 rounded-xl border border-slate-200 dark:border-[#324467]"
-              >
-                <div className="flex items-center justify-between gap-4 mb-2">
-                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">
-                    {project.name}
-                  </h3>
-                  {project.href && (
-                    <a
-                      className="text-sm font-semibold text-primary hover:underline underline-offset-4"
-                      href={project.href}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Live site
-                    </a>
-                  )}
-                </div>
-                <p className="text-slate-600 dark:text-slate-300">
-                  {project.description}
-                </p>
-              </div>
+      <section className="section-space">
+        <div className="site-container grid gap-14 lg:grid-cols-[.62fr_1.38fr] lg:gap-24">
+          <Reveal><SectionHeading eyebrow="Core capabilities" title="Breadth with a frontend centre of gravity." /></Reveal>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {capabilities.map((capability, index) => (
+              <Reveal key={capability.title} delay={index * 35}>
+                <article className="h-full rounded-2xl border border-line bg-surface/40 p-6 transition hover:border-accent/40 sm:p-7">
+                  <span className="font-mono text-xs text-accent">{capability.index}</span>
+                  <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">{capability.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-muted">{capability.description}</p>
+                  <p className="mt-5 font-mono text-[10px] leading-5 text-muted">{capability.technologies.join(" · ")}</p>
+                </article>
+              </Reveal>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold font-display mb-6">Skills</h2>
-          <div className="flex flex-wrap gap-3">
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                className="px-3 py-1 rounded-full bg-slate-200 dark:bg-[#232f48] text-slate-700 dark:text-slate-300 text-xs font-medium"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </section>
+      <section className="section-space border-t border-line">
+        <div className="site-container">
+          <Reveal><SectionHeading eyebrow="Selected projects" title="Small enough to understand. Useful enough to ship." description="The same project data powers this view and the homepage, keeping every detail consistent." /></Reveal>
+          <div className="mt-12 sm:mt-16">{projects.slice(0, 2).map((project, index) => <ProjectShowcase key={project.id} project={project} index={index} />)}</div>
+        </div>
+      </section>
 
-        <section
-          className="mb-16 bg-primary/10 border border-primary/20 rounded-3xl p-8 md:p-12 text-center flex flex-col items-center gap-6"
-          id="contact"
-        >
-          <span className="material-symbols-outlined text-primary text-5xl">
-            alternate_email
-          </span>
-          <h2 className="font-display text-3xl font-black dark:text-white">
-            Let&apos;s build something together
-          </h2>
-          <p className="text-lg text-slate-600 dark:text-slate-400 max-w-xl">
-            Open to interesting roles and freelance projects. If you have an
-            idea or need help shipping a product, let&apos;s talk.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4 mt-4">
-            <a
-              className="bg-primary text-white px-10 py-4 rounded-xl font-bold text-lg hover:bg-primary/90 transition-all font-display"
-              href="mailto:me@psami.com"
-            >
-              Send an Email
-            </a>
-            <a
-              className="h-14 w-14 rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-all text-slate-700 dark:text-slate-300"
-              href="https://x.com/psami"
-              aria-label="Twitter / X"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="material-symbols-outlined">share</span>
-            </a>
-            <a
-              className="h-14 w-14 rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-all text-slate-700 dark:text-slate-300"
-              href="https://github.com/Psami-wondah"
-              aria-label="GitHub"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="material-symbols-outlined">code</span>
-            </a>
-            <a
-              className="h-14 w-14 rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center hover:text-primary transition-all text-slate-700 dark:text-slate-300"
-              href="https://www.linkedin.com/in/okechukwu-samuel-owhondah-660328208/"
-              aria-label="LinkedIn"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className="material-symbols-outlined">work</span>
-            </a>
-          </div>
-        </section>
-      </main>
-
-      <SiteFooter variant="home" />
-    </div>
+      <ContactCta />
+    </main>
   );
 }
