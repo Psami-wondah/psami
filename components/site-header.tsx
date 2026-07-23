@@ -3,16 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import ThemeToggle from "@/components/theme-toggle";
 import { Close, Download, Menu } from "@/components/icons";
 import { navigation, siteLinks } from "@/lib/site-data";
 
 export default function SiteHeader() {
   const pathname = usePathname();
+  const [mounted, setMounted] = useState(false);
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -64,8 +70,43 @@ export default function SiteHeader() {
     return pathname.startsWith(href);
   };
 
+  const mobileNavigation = (
+    <div
+      className={`mobile-nav-backdrop ${open ? "is-open" : ""}`}
+      aria-hidden={!open}
+      onMouseDown={(event) => {
+        if (event.currentTarget === event.target) setOpen(false);
+      }}
+    >
+      <div ref={menuRef} id="mobile-navigation" className="mobile-nav-panel">
+        <p className="eyebrow mb-5">Navigation</p>
+        <nav className="flex flex-col" aria-label="Mobile navigation">
+          {navigation.map((item, index) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`mobile-nav-link ${isActive(item.href) ? "is-active" : ""}`}
+              onClick={() => setOpen(false)}
+            >
+              <span className="font-mono text-xs text-muted">0{index + 1}</span>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+        <div className="mt-auto grid grid-cols-2 gap-3 pt-8">
+          <a className="button-quiet justify-center" href={siteLinks.resume} download>
+            Résumé
+          </a>
+          <a className="button-primary justify-center" href={siteLinks.email}>
+            Let&apos;s talk
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <header className={`site-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header className={`site-header ${scrolled ? "is-scrolled" : ""} ${open ? "menu-open" : ""}`}>
       <div className="site-container flex h-[76px] items-center justify-between gap-6">
         <Link href="/" className="brand-mark" aria-label="Psami — home">
           <span className="brand-prompt" aria-hidden="true">~/</span>
@@ -106,39 +147,7 @@ export default function SiteHeader() {
           </button>
         </div>
       </div>
-
-      <div
-        className={`mobile-nav-backdrop ${open ? "is-open" : ""}`}
-        aria-hidden={!open}
-        onMouseDown={(event) => {
-          if (event.currentTarget === event.target) setOpen(false);
-        }}
-      >
-        <div ref={menuRef} id="mobile-navigation" className="mobile-nav-panel">
-          <p className="eyebrow mb-5">Navigation</p>
-          <nav className="flex flex-col" aria-label="Mobile navigation">
-            {navigation.map((item, index) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`mobile-nav-link ${isActive(item.href) ? "is-active" : ""}`}
-                onClick={() => setOpen(false)}
-              >
-                <span className="font-mono text-xs text-muted">0{index + 1}</span>
-                {item.label}
-              </Link>
-            ))}
-          </nav>
-          <div className="mt-auto grid grid-cols-2 gap-3 pt-8">
-            <a className="button-quiet justify-center" href={siteLinks.resume} download>
-              Résumé
-            </a>
-            <a className="button-primary justify-center" href={siteLinks.email}>
-              Let&apos;s talk
-            </a>
-          </div>
-        </div>
-      </div>
+      {mounted && createPortal(mobileNavigation, document.body)}
     </header>
   );
 }
