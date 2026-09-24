@@ -1,105 +1,17 @@
 import type { Metadata } from "next";
-import ContactCta from "@/components/contact-cta";
-import ExperienceList from "@/components/experience-list";
-import ProjectShowcase from "@/components/project-showcase";
-import Reveal from "@/components/reveal";
-import SectionHeading from "@/components/section-heading";
-import { capabilities, education, projects } from "@/lib/site-data";
+import Link from "next/link";
+import { capabilities, education, experience, professionalProjects, siteLinks } from "@/lib/site-data";
 
-export const metadata: Metadata = {
-  title: "About Okechukwu Samuel Owhondah | Software Engineer",
-  description: "The experience, approach, and technical capabilities behind Okechukwu Samuel Owhondah's frontend and full-stack engineering work.",
-};
+export const metadata: Metadata = { title: "About Samuel Owhondah | Psami", description: "The experience and approach behind Samuel Owhondah's product engineering, frontend systems and applied experiments." };
 
 export default function AboutPage() {
-  return (
-    <main id="main-content">
-      <section className="relative overflow-hidden pb-20 pt-16 sm:pb-28 sm:pt-24">
-        <div className="hero-grid pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="site-container relative">
-          <p className="eyebrow">About / Okechukwu Samuel Owhondah</p>
-          <h1 className="mt-7 max-w-6xl text-balance font-display text-[clamp(3.2rem,9vw,8.5rem)] font-semibold leading-[.92] tracking-[-.065em] text-strong">
-            Engineer by practice. <span className="text-accent">Problem solver</span> by instinct.
-          </h1>
-          <div className="mt-10 grid gap-8 border-t border-line pt-8 md:grid-cols-[.85fr_1.15fr] md:gap-16">
-            <p className="font-mono text-xs uppercase tracking-[.16em] text-muted">Based in the United Kingdom<br />Originally from Nigeria</p>
-            <div className="space-y-5 text-base leading-8 text-muted sm:text-lg">
-              <p>I&apos;m Okechukwu Samuel Owhondah, a frontend and full-stack software engineer interested in the point where product clarity and technical depth meet.</p>
-              <p>My work has moved between data-rich React interfaces, real-time product features, Python services, third-party integrations, and the infrastructure that gets them safely into users&apos; hands.</p>
-              <p>An earlier foundation in Electrical and Electronics Engineering still shapes how I think: understand the system, find the signal, and make the whole thing easier to reason about.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space border-y border-line bg-surface/35">
-        <div className="site-container grid gap-14 lg:grid-cols-[.65fr_1.35fr] lg:gap-24">
-          <Reveal><SectionHeading eyebrow="Philosophy" title="The interface is part of the system." description="I care about the details users notice and the architecture they never should have to." /></Reveal>
-          <Reveal delay={80}>
-            <div className="grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
-              {[
-                ["Clarity", "Make state, intent, and next actions obvious."],
-                ["Performance", "Treat speed and responsiveness as product behavior."],
-                ["Resilience", "Design graceful paths through failure and change."],
-                ["Ownership", "Follow the problem from discovery to production."],
-              ].map(([title, copy], index) => (
-                <article key={title} className="bg-canvas p-6 sm:p-8"><span className="font-mono text-xs text-accent">0{index + 1}</span><h3 className="mt-8 font-display text-2xl font-semibold tracking-tight">{title}</h3><p className="mt-3 text-sm leading-7 text-muted">{copy}</p></article>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="site-container grid gap-14 lg:grid-cols-[.7fr_1.3fr] lg:gap-20">
-          <Reveal><div className="lg:sticky lg:top-28"><SectionHeading eyebrow="Career timeline" title="Work built across disciplines." description="From complex charts and authentication flows to real-time location systems and deployment pipelines." /></div></Reveal>
-          <ExperienceList />
-        </div>
-      </section>
-
-      <section className="section-space border-y border-line bg-surface/35">
-        <div className="site-container">
-          <Reveal><SectionHeading eyebrow="Education" title="Two ways of thinking about systems." /></Reveal>
-          <div className="mt-10 grid gap-5 md:grid-cols-2">
-            {education.map((item, index) => (
-              <Reveal key={item.degree} delay={index * 70}>
-                <article className="h-full rounded-2xl border border-line bg-canvas p-7 sm:p-9">
-                  <span className="font-mono text-xs text-accent">0{index + 1} / DEGREE</span>
-                  <h3 className="mt-8 font-display text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">{item.degree}</h3>
-                  <p className="mt-5 text-sm leading-7 text-muted">{item.school}<br />{item.location}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="site-container grid gap-14 lg:grid-cols-[.62fr_1.38fr] lg:gap-24">
-          <Reveal><SectionHeading eyebrow="Core capabilities" title="Breadth with a frontend centre of gravity." /></Reveal>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {capabilities.map((capability, index) => (
-              <Reveal key={capability.title} delay={index * 35}>
-                <article className="h-full rounded-2xl border border-line bg-surface/40 p-6 transition hover:border-accent/40 sm:p-7">
-                  <span className="font-mono text-xs text-accent">{capability.index}</span>
-                  <h3 className="mt-6 font-display text-xl font-semibold tracking-tight">{capability.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-muted">{capability.description}</p>
-                  <p className="mt-5 font-mono text-[10px] leading-5 text-muted">{capability.technologies.join(" · ")}</p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space border-t border-line">
-        <div className="site-container">
-          <Reveal><SectionHeading eyebrow="Selected projects" title="Small enough to understand. Useful enough to ship." description="The same project data powers this view and the homepage, keeping every detail consistent." /></Reveal>
-          <div className="mt-12 sm:mt-16">{projects.slice(0, 2).map((project, index) => <ProjectShowcase key={project.id} project={project} index={index} />)}</div>
-        </div>
-      </section>
-
-      <ContactCta />
-    </main>
-  );
+  return <main id="main-content" className="site-container inner-page">
+    <div className="page-overline"><span>04 / PERSON</span><Link href="/">← Index</Link></div>
+    <header className="inner-hero"><p className="micro-label">About / Samuel Owhondah</p><h1>Building with clarity,<br/><em>from idea to system.</em></h1><p>I&apos;m a software engineer based in Northampton, UK. I work across product engineering, frontend systems and applied experimentation, with an interest in making complex things feel clear.</p></header>
+    <section className="inner-section"><div className="section-intro"><span className="section-number">01 / PRACTICE</span><h2>How I work.</h2></div><div className="inner-copy"><p>My work has moved between data-rich React interfaces, real-time product features, Python services, third-party integrations and the infrastructure that gets them into users&apos; hands.</p><p>An earlier foundation in Electrical and Electronics Engineering still shapes how I think: understand the system, find the signal and make the whole thing easier to reason about.</p></div></section>
+    <section className="inner-section"><div className="section-intro"><span className="section-number">02 / EXPERIENCE</span><h2>Where I&apos;ve worked.</h2></div><div className="record-list">{experience.map((item, index) => <article className="record" key={item.company}><span className="index-number">{String(index + 1).padStart(2, "0")}</span><div><h3>{item.company}</h3><p>{item.role} · {item.location}</p><p className="record-summary">{item.summary}</p><details><summary>Selected contributions <span>+</span></summary><ul>{item.contributions.map((contribution) => <li key={contribution}>{contribution}</li>)}</ul></details></div></article>)}</div></section>
+    <section className="inner-section"><div className="section-intro"><span className="section-number">03 / CLIENT WORK</span><h2>Professional work.</h2></div><div className="record-list">{professionalProjects.map((item, index) => <article className="record" key={item.id}><span className="index-number">{String(index + 1).padStart(2, "0")}</span><div><h3>{item.name}</h3><p>{item.category} · {item.role}</p><p className="record-summary">{item.summary}</p><details><summary>More context <span>+</span></summary><p>{item.focus}</p><p>{item.technologies.join(" · ")}</p>{item.liveUrl && <a href={item.liveUrl} target="_blank" rel="noreferrer">Visit site ↗</a>}</details></div></article>)}</div></section>
+    <section className="inner-section"><div className="section-intro"><span className="section-number">04 / BACKGROUND</span><h2>Education & tools.</h2></div><div className="inner-copy"><div className="education-list">{education.map((item) => <div key={item.degree}><strong>{item.degree}</strong><span>{item.school} · {item.location}</span></div>)}</div><details className="tools-details"><summary>Tools I work with <span>+</span></summary><ul>{capabilities.map((item) => <li key={item.title}><strong>{item.title}</strong><span>{item.technologies.join(" · ")}</span></li>)}</ul></details></div></section>
+    <section className="inner-section contact-section"><div className="section-intro"><span className="section-number">05 / CONTACT</span><h2>In touch.</h2></div><div className="inner-copy"><p>Open to selected engineering roles and product collaborations.</p><div className="about-contact"><a href={siteLinks.email}>Email ↗</a><a href={siteLinks.github} target="_blank" rel="noreferrer">GitHub ↗</a><a href={siteLinks.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={siteLinks.resume} download>Résumé ↓</a></div></div></section>
+  </main>;
 }
