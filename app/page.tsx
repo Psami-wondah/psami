@@ -1,289 +1,31 @@
 import Link from "next/link";
-import ContactCta from "@/components/contact-cta";
-import ExperienceList from "@/components/experience-list";
-import { ArrowRight, ArrowUpRight, Download, Github } from "@/components/icons";
-import ProjectShowcase from "@/components/project-showcase";
-import Reveal from "@/components/reveal";
-import SectionHeading from "@/components/section-heading";
-import { formatDate } from "@/lib/format";
+import ProjectIndex from "@/components/project-index";
 import { getAllPosts } from "@/lib/posts";
-import { capabilities, principles, projects, siteLinks } from "@/lib/site-data";
+import { formatDate } from "@/lib/format";
+import { projects, professionalProjects, siteLinks } from "@/lib/site-data";
+
+const sections = [
+  { number: "01", label: "Selected work", href: "#work" },
+  { number: "02", label: "Experiments", href: "#experiments" },
+  { number: "03", label: "Writing", href: "#writing" },
+  { number: "04", label: "About", href: "#about" },
+];
 
 export default function Home() {
   const posts = getAllPosts().slice(0, 3);
+  return <main id="main-content">
+    <section className="home-hero site-container" aria-labelledby="home-title">
+      <div className="hero-overline"><span>Personal index / 001</span><span>2026</span></div>
+      <div className="hero-content"><p className="micro-label">Samuel Owhondah · Software engineer</p><h1 id="home-title">A practice in building<br/><em>useful things.</em></h1><p className="hero-description">Products, tools and experiments made with care and curiosity.</p></div>
+      <div className="hero-bottom"><nav className="hero-index" aria-label="Explore this page">{sections.map((section) => <a href={section.href} key={section.number}><span>{section.number}</span><strong>{section.label}</strong><span>↗</span></a>)}</nav><div className="hero-aside"><span>Northampton / UK</span><a href="#about">Currently open to selected work ↓</a></div></div>
+    </section>
 
-  return (
-    <main id="main-content">
-      <section className="relative overflow-hidden pb-16 pt-14 sm:pt-20 lg:pb-24 lg:pt-28">
-        <div
-          className="hero-grid pointer-events-none absolute inset-0"
-          aria-hidden="true"
-        />
-        <div className="site-container relative">
-          <div className="grid items-center gap-14 lg:grid-cols-[1.12fr_.88fr] lg:gap-10">
-            <div>
-              <div className="hero-enter inline-flex items-center gap-3 rounded-full border border-line bg-surface/60 px-4 py-2 text-xs font-medium text-muted">
-                <span className="availability-dot" aria-hidden="true" />
-                Available for selected projects and opportunities
-              </div>
-              <h1 className="hero-heading hero-enter mt-8 [animation-delay:80ms]">
-                I build thoughtful digital products{" "}
-                <span className="gradient-text">that perform.</span>
-              </h1>
-              <p className="hero-enter mt-7 max-w-2xl text-base leading-8 text-muted [animation-delay:160ms] sm:text-lg">
-                I&apos;m Okechukwu Samuel Owhondah, a Frontend / Full-Stack
-                Software Engineer focused on high-performance interfaces,
-                scalable applications and complex data-driven products.
-              </p>
-              <div className="hero-enter mt-9 flex flex-wrap gap-3 [animation-delay:240ms]">
-                <Link className="button-primary" href="#work">
-                  Explore my work
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
-                <a className="button-quiet" href={siteLinks.resume} download>
-                  <Download className="h-4 w-4" />
-                  Download résumé
-                </a>
-                <a
-                  className="button-quiet"
-                  href={siteLinks.github}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  <Github className="h-4 w-4" />
-                  GitHub
-                </a>
-              </div>
-            </div>
+    <section id="work" className="archive-section site-container" aria-labelledby="work-heading"><div className="section-intro"><span className="section-number">01 / INDEX</span><div><h2 id="work-heading">Selected work<span className="section-period">.</span></h2><p>Four entries across product, research and client work. Select a row to read more.</p></div></div><ProjectIndex projects={projects}/></section>
 
-            <div className="hero-enter [animation-delay:300ms]">
-              <div
-                className="hero-visual"
-                aria-label="Code transforming into a data product interface"
-                role="img"
-              >
-                <div className="code-window">
-                  <div className="window-bar">
-                    <i />
-                    <i />
-                    <i />
-                    <span>product.tsx</span>
-                  </div>
-                  <div className="code-body">
-                    <p>
-                      <b>type</b> Product = {"{"}
-                    </p>
-                    <p>
-                      &nbsp;&nbsp;clarity: <em>true</em>;
-                    </p>
-                    <p>
-                      &nbsp;&nbsp;performance: <em>&quot;fast&quot;</em>;
-                    </p>
-                    <p>
-                      &nbsp;&nbsp;architecture: <em>&quot;scalable&quot;</em>;
-                    </p>
-                    <p>{"}"};</p>
-                    <br />
-                    <p>
-                      <b>export</b> function build
-                    </p>
-                    <p>&nbsp;&nbsp;(problem: Complex) → Product</p>
-                  </div>
-                </div>
-                <div className="product-window">
-                  <p className="visual-kicker">SYSTEM / HEALTHY</p>
-                  <div className="metric-row mt-3">
-                    <div className="metric">
-                      <span>UX</span>
-                      <strong>Clear</strong>
-                    </div>
-                    <div className="metric">
-                      <span>STATE</span>
-                      <strong>Stable</strong>
-                    </div>
-                    <div className="metric">
-                      <span>LOAD</span>
-                      <strong>Fast</strong>
-                    </div>
-                  </div>
-                  <div className="mini-chart">
-                    {[34, 52, 45, 72, 59, 86, 78, 96].map((height, index) => (
-                      <i
-                        key={index}
-                        style={{
-                          height: `${height}%`,
-                          animationDelay: `${index * 50}ms`,
-                        }}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+    <section id="experiments" className="archive-section site-container" aria-labelledby="experiments-heading"><div className="section-intro"><span className="section-number">02 / IN PROGRESS</span><div><h2 id="experiments-heading">Experiments<span className="section-period">.</span></h2><p>Smaller inquiries that sit between research and product.</p></div></div><div className="simple-index"><a href="#work"><span>01</span><strong>Assistive vision</strong><span>Camera input, reading and external display</span><b>↗</b></a><a href="#work"><span>02</span><strong>Cross-device text</strong><span>A quicker path from one screen to another</span><b>↗</b></a></div></section>
 
-          <div className="credibility-grid mt-16 lg:mt-24">
-            {[
-              ["5+ years", "Building software"],
-              ["Frontend + full-stack", "Across the product stack"],
-              ["React · Next.js · TS", "Primary toolkit"],
-              ["Remote experience", "UK · NL · Nigeria"],
-            ].map(([value, label]) => (
-              <div className="credibility-item" key={label}>
-                <strong>{value}</strong>
-                <span>{label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <section id="writing" className="archive-section site-container" aria-labelledby="writing-heading"><div className="section-intro"><span className="section-number">03 / NOTES</span><div><h2 id="writing-heading">Writing<span className="section-period">.</span></h2><p>Observations from the work, filed as they come.</p></div></div><div className="writing-index">{posts.map((post) => <Link href={`/blog/${post.slug}`} key={post.slug} className="writing-row"><time dateTime={post.frontmatter.date}>{formatDate(post.frontmatter.date)}</time><span><strong>{post.frontmatter.title}</strong><small>{post.frontmatter.description} · {post.frontmatter.readingTime}</small></span><b aria-hidden="true">↗</b></Link>)}</div><Link className="text-link section-tail" href="/blog">All writing <span>↗</span></Link></section>
 
-      <section id="work" className="section-space scroll-mt-24">
-        <div className="site-container">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Selected work"
-              title="Products shaped around real problems."
-              description="A selection of product work spanning browser tools, event technology and payments—presented with the engineering decisions that matter."
-            />
-          </Reveal>
-          <div className="mt-12 sm:mt-16">
-            {projects.map((project, index) => (
-              <ProjectShowcase
-                key={project.id}
-                project={project}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space border-y border-line bg-surface/35">
-        <div className="site-container grid gap-14 lg:grid-cols-[.72fr_1.28fr] lg:gap-20">
-          <Reveal>
-            <div className="lg:sticky lg:top-28">
-              <SectionHeading
-                eyebrow="Experience"
-                title="Engineering across products and teams."
-                description="A concise view of roles where I have shipped interfaces, services, integrations, and delivery systems."
-              />
-              <Link
-                className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-accent"
-                href="/about"
-              >
-                Full career story
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-          <ExperienceList compact />
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="site-container grid gap-14 lg:grid-cols-[.68fr_1.32fr] lg:gap-20">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Capabilities"
-              title="Useful depth, across the stack."
-              description="Technology is supporting detail. The focus is what the system needs to do well."
-            />
-          </Reveal>
-          <div>
-            {capabilities.map((capability, index) => (
-              <Reveal key={capability.title} delay={index * 35}>
-                <article className="capability-row">
-                  <span className="font-mono text-xs text-accent">
-                    {capability.index}
-                  </span>
-                  <h3 className="font-display text-xl font-semibold tracking-tight text-strong">
-                    {capability.title}
-                  </h3>
-                  <div>
-                    <p className="text-sm leading-7 text-muted">
-                      {capability.description}
-                    </p>
-                    <p className="mt-3 font-mono text-[11px] leading-5 text-muted">
-                      {capability.technologies.join(" · ")}
-                    </p>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space border-y border-line bg-surface/35">
-        <div className="site-container grid gap-14 lg:grid-cols-2 lg:gap-24">
-          <Reveal>
-            <SectionHeading
-              eyebrow="Engineering principles"
-              title="How I make decisions when the answer is not obvious."
-            />
-          </Reveal>
-          <div>
-            {principles.map((principle, index) => (
-              <Reveal key={principle} delay={index * 45}>
-                <div className="principle-row">
-                  <span className="font-mono text-xs text-accent">
-                    0{index + 1}
-                  </span>
-                  <p className="font-display text-xl font-medium tracking-tight text-strong sm:text-2xl">
-                    {principle}
-                  </p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-space">
-        <div className="site-container">
-          <Reveal>
-            <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
-              <SectionHeading
-                eyebrow="Latest writing"
-                title="Notes from the work."
-                description="Practical explanations of testing, backend systems, security, and the decisions behind dependable software."
-              />
-              <Link
-                className="inline-flex shrink-0 items-center gap-2 text-sm font-semibold text-accent"
-                href="/blog"
-              >
-                View all articles
-                <ArrowRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </Reveal>
-          <div className="mt-10 border-t border-line">
-            {posts.map((post, index) => (
-              <Reveal key={post.slug} delay={index * 55}>
-                <Link className="article-row group" href={`/blog/${post.slug}`}>
-                  <div className="font-mono text-[11px] uppercase tracking-wider text-muted">
-                    {formatDate(post.frontmatter.date)}
-                    <span className="mx-2">·</span>
-                    {post.frontmatter.readingTime}
-                  </div>
-                  <div>
-                    <h3 className="font-display text-xl font-semibold tracking-tight text-strong transition-colors group-hover:text-accent sm:text-2xl">
-                      {post.frontmatter.title}
-                    </h3>
-                    <p className="mt-2 max-w-2xl text-sm leading-6 text-muted">
-                      {post.frontmatter.description}
-                    </p>
-                  </div>
-                  <ArrowUpRight className="h-5 w-5 text-muted transition group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-accent" />
-                </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <ContactCta />
-    </main>
-  );
+    <section id="about" className="archive-section site-container about-home" aria-labelledby="about-heading"><div className="section-intro"><span className="section-number">04 / PERSON</span><div><h2 id="about-heading">About<span className="section-period">.</span></h2></div></div><div className="about-home-grid"><p className="about-statement">I build software across product engineering, frontend systems and applied experimentation.</p><div className="about-details"><details><summary>Experience <span>+</span></summary><p>Product engineering across healthcare, data-rich interfaces, payments and early-stage teams. <Link href="/about">More about my work ↗</Link></p></details><details><summary>Education <span>+</span></summary><p>MSc Computing (Software Engineering), University of Northampton; BEng Electrical & Electronics Engineering, FUTO.</p></details><details><summary>Professional work <span>+</span></summary><ul>{professionalProjects.map((project) => <li key={project.id}><strong>{project.name}</strong><span>{project.category}</span></li>)}</ul></details><details><summary>Contact & availability <span>+</span></summary><p>Based in Northampton, UK. Open to selected engineering and product collaborations.</p><div className="about-contact"><a href={siteLinks.email}>Email ↗</a><a href={siteLinks.resume} download>Résumé ↓</a><a href={siteLinks.github} target="_blank" rel="noreferrer">GitHub ↗</a></div></details></div></div></section>
+  </main>;
 }

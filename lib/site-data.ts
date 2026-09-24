@@ -1,19 +1,17 @@
 export type Project = {
-  id:
-    | "copyyt"
-    | "skye-health"
-    | "health-anchor"
-    | "solidray"
-    | "rie-ticket"
-    | "billza";
+  id: string;
   name: string;
-  eyebrow: string;
+  category: string;
+  year?: string;
   summary: string;
   role: string;
-  challenge: string;
-  outcome: string;
+  focus: string;
   technologies: string[];
+  visual?: "koinovera" | "vision" | "ninewells" | "copyyt";
+  status?: string;
   liveUrl?: string;
+  githubUrl?: string;
+  caseStudyUrl?: string;
 };
 
 export type Experience = {
@@ -42,94 +40,44 @@ export const siteLinks = {
 } as const;
 
 export const navigation = [
-  { label: "Home", href: "/" },
   { label: "Work", href: "/#work" },
-  { label: "Blog", href: "/blog" },
+  { label: "Writing", href: "/blog" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/#contact" },
 ] as const;
 
 export const projects: Project[] = [
-  // {
-  //   id: "copyyt",
-  //   name: "Copyyt",
-  //   eyebrow: "Browser extension · Product",
-  //   summary:
-  //     "A focused cross-device clipboard that makes copied text available wherever you need it.",
-  //   role: "Product engineer",
-  //   challenge:
-  //     "Designing a low-friction browser extension workflow for moving text between devices.",
-  //   outcome:
-  //     "A released Chrome extension product, last documented at version 1.2.",
-  //   technologies: ["Chrome Extension", "JavaScript", "Web APIs"],
-  //   liveUrl: "https://copyyt.psami.com",
-  // },
   {
-    id: "skye-health",
-    name: "Skye Health / PROMease",
-    eyebrow: "Digital health · Clinical analytics",
-    summary:
-      "A cloud platform that combines clinical data with patient-reported outcomes to turn feedback into actionable surgical insights.",
-    role: "Software engineer",
-    challenge:
-      "Making procedure-specific outcome collection, care timelines, and clinical analysis work as one coherent workflow.",
-    outcome:
-      "Secure PROM collection, real-time patient data, and analytics designed for clinical governance and research.",
-    technologies: ["Healthcare data", "FHIR", "SNOMED", "Analytics"],
-    liveUrl: "https://skyehealth.net/",
+    id: "koinovera", name: "Koinovera", category: "Evidence platform / Product", year: "2026",
+    summary: "A community-powered platform for collecting and evaluating evidence around claims and topics.",
+    role: "Founder / Engineer", focus: "Product design, frontend, backend APIs, and search-assisted evidence tooling.",
+    technologies: ["React", "NestJS", "PostgreSQL"], visual: "koinovera", status: "In development",
   },
   {
-    id: "health-anchor",
-    name: "Health Anchor",
-    eyebrow: "Healthtech · Pathway management",
-    summary:
-      "An intelligent digital pathway platform for automating clinical appointment booking and reducing operational friction.",
-    role: "Software engineer",
-    challenge:
-      "Supporting configurable healthcare pathways while keeping booking, referrals, and clinical data interoperable.",
-    outcome:
-      "CareCalendar booking, reporting, EHR interoperability, and APIs for integration into existing services.",
-    technologies: ["Care pathways", "FHIR", "SNOMED CT", "APIs"],
-    liveUrl: "https://healthanchor.co.uk/",
-  },
-  // {
-  //   id: "solidray",
-  //   name: "Solidray",
-  //   eyebrow: "Web3 · Digital assets",
-  //   summary:
-  //     "A blockchain ecosystem designed to bring exchange, marketplace, launchpad, and learning experiences into one product.",
-  //   role: "Software engineer",
-  //   challenge:
-  //     "Creating an approachable secondary-market experience for both experienced crypto users and newcomers.",
-  //   outcome:
-  //     "A unified product direction spanning custodial and non-custodial exchange, NFTs, launches, and education.",
-  //   technologies: ["Web3", "Digital assets", "Exchange", "NFT marketplace"],
-  //   liveUrl: "https://solidray.io/",
-  // },
-  {
-    id: "rie-ticket",
-    name: "Rie Ticket",
-    eyebrow: "Event technology · Web app",
-    summary:
-      "An event ticketing experience built around a clear purchase flow and online payments.",
-    role: "Frontend engineer",
-    challenge:
-      "Keeping event discovery and payment interactions coherent across the purchase journey.",
-    outcome: "A React ticketing product with Paystack payment integration.",
-    technologies: ["React", "Paystack", "JavaScript"],
+    id: "vision-display", name: "Vision Display", category: "Assistive computing / Research", year: "2026",
+    summary: "A mobile computer-vision application built as part of research into smart-glasses assistance for people with low vision.",
+    role: "Research / Engineer", focus: "External camera display, OCR, viewport controls, and face-recognition experiments.",
+    technologies: ["Computer vision", "Mobile", "OCR"], visual: "vision", status: "Research project",
   },
   {
-    id: "billza",
-    name: "Billza",
-    eyebrow: "Fintech · Full-stack",
-    summary:
-      "A utility and bill payment platform connecting everyday payments to provider services.",
-    role: "Full-stack engineer",
-    challenge:
-      "Coordinating payment and utility-provider integrations behind a dependable user flow.",
-    outcome: "A Django-based platform integrated with Monnify and Tiqwa.",
-    technologies: ["Django", "Monnify", "Tiqwa"],
+    id: "ninewells", name: "Ninewells", category: "Client work / Web", year: "2026",
+    summary: "A modern digital presence for a law firm, with an emphasis on premium positioning, usability, and presentation.",
+    role: "Engineer", focus: "Editorial presentation, responsive interaction, and usable navigation.",
+    technologies: ["Web", "Frontend", "Responsive design"], visual: "ninewells",
   },
+  {
+    id: "copyyt", name: "Copyyt", category: "Utility / Experiment", year: "2024",
+    summary: "A lightweight cross-device clipboard experiment for moving copied text between devices.",
+    role: "Product engineer", focus: "A low-friction browser extension and cross-device text transfer.",
+    technologies: ["Chrome Extension", "JavaScript", "Web APIs"], visual: "copyyt",
+    liveUrl: "https://copyyt.psami.com",
+  },
+];
+
+export const professionalProjects: Project[] = [
+  { id: "skye-health", name: "Skye Health / PROMease", category: "Clinical analytics", summary: "A platform combining clinical data with patient-reported outcomes for surgical insight.", role: "Software engineer", focus: "Outcome collection, care timelines, and clinical analysis.", technologies: ["FHIR", "SNOMED", "Analytics"], liveUrl: "https://skyehealth.net/" },
+  { id: "health-anchor", name: "Health Anchor", category: "Healthtech", summary: "A digital pathway platform for clinical appointment booking and referrals.", role: "Software engineer", focus: "Booking, reporting, EHR interoperability, and APIs.", technologies: ["Care pathways", "FHIR", "APIs"], liveUrl: "https://healthanchor.co.uk/" },
+  { id: "rie-ticket", name: "Rie Ticket", category: "Event technology", summary: "An event ticketing experience with a clear purchase flow and online payments.", role: "Frontend engineer", focus: "Event discovery and payment interactions.", technologies: ["React", "Paystack", "JavaScript"] },
+  { id: "billza", name: "Billza", category: "Fintech", summary: "A utility and bill payment platform connected to provider services.", role: "Full-stack engineer", focus: "Payment and utility-provider integrations.", technologies: ["Django", "Monnify", "Tiqwa"] },
 ];
 
 export const experience: Experience[] = [
