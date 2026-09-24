@@ -16,11 +16,12 @@ function VisionVisual() {
     <div className="vision-controls"><span>CAMERA INPUT</span><span>OCR · VIEWPORT · DISPLAY</span></div>
   </div>;
 }
-function NinewellsVisual() {
-  return <div className="preview-art preview-ninewells" aria-hidden="true">
-    <div className="preview-topline"><span>NINEWELLS</span><span>Legal practice</span></div>
-    <div className="ninewells-editorial"><span>Clarity in every decision.</span><strong>Counsel for<br/>what comes next.</strong><i>Thoughtful legal guidance, grounded in experience.</i></div>
-    <div className="ninewells-rule"><span>EXPERTISE</span><span>PEOPLE</span><span>CONTACT</span></div>
+function SkyeHealthVisual() {
+  return <div className="preview-art preview-skye" aria-hidden="true">
+    <div className="preview-topline"><span>PROMEASE</span><span>Recovery / 003</span></div>
+    <div className="skye-overview"><span className="micro-label">POST-OP RECOVERY</span><strong>Care beyond<br/>the clinic.</strong><p>Patient-reported outcomes, in view.</p></div>
+    <div className="skye-pathway"><div><span>01</span><p>Patient enrolled</p><i>○</i></div><div><span>02</span><p>Outcome reported</p><i>○</i></div><div><span>03</span><p>Care team review</p><i>○</i></div></div>
+    <div className="skye-foot"><span>CARE PATHWAY</span><span>CLINICIAN VIEW ↗</span></div>
   </div>;
 }
 function CopyytVisual() {
@@ -29,7 +30,7 @@ function CopyytVisual() {
     <div className="copyyt-transfer"><div className="copyyt-device"><span>DESKTOP</span><p>Something worth keeping, wherever you go.</p><small>Copied ✓</small></div><div className="copyyt-arrow">→</div><div className="copyyt-device compact"><span>MOBILE</span><p>Something worth keeping, wherever you go.</p><small>Received</small></div></div>
   </div>;
 }
-const visuals = { koinovera: KoinoveraVisual, vision: VisionVisual, ninewells: NinewellsVisual, copyyt: CopyytVisual };
+const visuals = { koinovera: KoinoveraVisual, vision: VisionVisual, "skye-health": SkyeHealthVisual, copyyt: CopyytVisual };
 export default function ProjectVisual({ project }: VisualProps) {
   const Visual = project.visual ? visuals[project.visual] : null;
   return Visual ? <Visual /> : null;

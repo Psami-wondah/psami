@@ -7,7 +7,7 @@ export type Project = {
   role: string;
   focus: string;
   technologies: string[];
-  visual?: "koinovera" | "vision" | "ninewells" | "copyyt";
+  visual?: "koinovera" | "vision" | "skye-health" | "copyyt";
   status?: string;
   liveUrl?: string;
   githubUrl?: string;
@@ -50,7 +50,8 @@ export const projects: Project[] = [
     id: "koinovera", name: "Koinovera", category: "Evidence platform / Product", year: "2026",
     summary: "A community-powered platform for collecting and evaluating evidence around claims and topics.",
     role: "Founder / Engineer", focus: "Product design, frontend, backend APIs, and search-assisted evidence tooling.",
-    technologies: ["React", "NestJS", "PostgreSQL"], visual: "koinovera", status: "In development",
+    technologies: ["React", "NestJS", "PostgreSQL"], visual: "koinovera", status: "Live",
+    liveUrl: "https://koinovera.com/",
   },
   {
     id: "vision-display", name: "Vision Display", category: "Assistive computing / Research", year: "2026",
@@ -59,22 +60,22 @@ export const projects: Project[] = [
     technologies: ["Computer vision", "Mobile", "OCR"], visual: "vision", status: "Research project",
   },
   {
-    id: "ninewells", name: "Ninewells", category: "Client work / Web", year: "2026",
-    summary: "A modern digital presence for a law firm, with an emphasis on premium positioning, usability, and presentation.",
-    role: "Engineer", focus: "Editorial presentation, responsive interaction, and usable navigation.",
-    technologies: ["Web", "Frontend", "Responsive design"], visual: "ninewells",
+    id: "skye-health", name: "Skye Health / PROMease", category: "Digital health / Client work",
+    summary: "A platform for monitoring post-operative recovery through patient-reported outcomes and clinical follow-up workflows.",
+    role: "Software engineer", focus: "Procedure-specific outcome collection, care timelines, and clinical data presentation.",
+    technologies: ["FHIR", "SNOMED CT", "Analytics"], visual: "skye-health", status: "Live",
+    liveUrl: "https://skyehealth.net/",
   },
   {
     id: "copyyt", name: "Copyyt", category: "Utility / Experiment", year: "2024",
     summary: "A lightweight cross-device clipboard experiment for moving copied text between devices.",
     role: "Product engineer", focus: "A low-friction browser extension and cross-device text transfer.",
     technologies: ["Chrome Extension", "JavaScript", "Web APIs"], visual: "copyyt",
-    liveUrl: "https://copyyt.psami.com",
+    liveUrl: "https://copyyt.com/", status: "Live",
   },
 ];
 
 export const professionalProjects: Project[] = [
-  { id: "skye-health", name: "Skye Health / PROMease", category: "Clinical analytics", summary: "A platform combining clinical data with patient-reported outcomes for surgical insight.", role: "Software engineer", focus: "Outcome collection, care timelines, and clinical analysis.", technologies: ["FHIR", "SNOMED", "Analytics"], liveUrl: "https://skyehealth.net/" },
   { id: "health-anchor", name: "Health Anchor", category: "Healthtech", summary: "A digital pathway platform for clinical appointment booking and referrals.", role: "Software engineer", focus: "Booking, reporting, EHR interoperability, and APIs.", technologies: ["Care pathways", "FHIR", "APIs"], liveUrl: "https://healthanchor.co.uk/" },
   { id: "rie-ticket", name: "Rie Ticket", category: "Event technology", summary: "An event ticketing experience with a clear purchase flow and online payments.", role: "Frontend engineer", focus: "Event discovery and payment interactions.", technologies: ["React", "Paystack", "JavaScript"] },
   { id: "billza", name: "Billza", category: "Fintech", summary: "A utility and bill payment platform connected to provider services.", role: "Full-stack engineer", focus: "Payment and utility-provider integrations.", technologies: ["Django", "Monnify", "Tiqwa"] },
