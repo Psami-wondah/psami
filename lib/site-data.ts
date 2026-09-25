@@ -78,6 +78,7 @@ export const projects: Project[] = [
     summary: "A mobile computer-vision application built as part of research into smart-glasses assistance for people with low vision.",
     role: "Research / Engineer", focus: "External camera display, OCR, viewport controls, and face-recognition experiments.",
     technologies: ["Computer vision", "Mobile", "OCR"], visual: "vision", status: "Research project",
+    githubUrl: "https://github.com/Psami-wondah/vision-display",
   },
   {
     id: "skye-health", name: "Skye Health / PROMease", category: "Digital health / Client work",
@@ -108,9 +109,9 @@ export const projects: Project[] = [
 ];
 
 export const professionalProjects: Project[] = [
+  { id: "global-fund-data-explorer", name: "Global Fund Data Explorer", category: "Global health data / Zimmerman", summary: "A platform for exploring global health investment, financial and programme-result data, with an interactive report builder.", role: "Frontend engineer", focus: "Report-builder layouts, drag-and-drop blocks, configurable ECharts and D3 visualisations, asset library and autosave reliability.", technologies: ["React", "TypeScript", "ECharts", "D3", "dnd-kit"], liveUrl: "https://data.theglobalfund.org/" },
   { id: "health-anchor", name: "Health Anchor", category: "Healthtech", summary: "A digital pathway platform for clinical appointment booking and referrals.", role: "Software engineer", focus: "Booking, reporting, EHR interoperability, and APIs.", technologies: ["Care pathways", "FHIR", "APIs"], liveUrl: "https://healthanchor.co.uk/" },
-  { id: "rie-ticket", name: "Rie Ticket", category: "Event technology", summary: "An event ticketing experience with a clear purchase flow and online payments.", role: "Frontend engineer", focus: "Event discovery and payment interactions.", technologies: ["React", "Paystack", "JavaScript"] },
-  { id: "billza", name: "Billza", category: "Fintech", summary: "A utility and bill payment platform connected to provider services.", role: "Full-stack engineer", focus: "Payment and utility-provider integrations.", technologies: ["Django", "Monnify", "Tiqwa"] },
+  { id: "talnts", name: "Talnts", category: "Edtech / Techsemester", summary: "A platform for learning in-demand skills from creators through courses, cohorts and events, and earning from your own knowledge.", role: "Full-stack engineer", focus: "Google and password authentication, Firebase Cloud Messaging notifications, Recoil state, and Dockerised microservices on AWS EC2.", technologies: ["React", "Django", "Firebase", "Docker", "AWS"], liveUrl: "https://www.talnts.app/" },
 ];
 
 export const experience: Experience[] = [
