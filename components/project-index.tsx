@@ -23,7 +23,7 @@ export default function ProjectIndex({ projects }: { projects: Project[] }) {
           </button></h3>
           <div id={`project-${project.id}`} className="project-expansion" hidden={!open}>
             <div className="project-expanded-inner">
-              <div className="project-mobile-visual"><ProjectVisual project={project} /></div>
+              {(project.visual || project.screenshots) && <div className="project-mobile-visual"><ProjectVisual project={project} active={open} /></div>}
               <p className="project-summary">{project.summary}</p>
               <dl className="project-meta"><div><dt>Role</dt><dd>{project.role}</dd></div><div><dt>Focus</dt><dd>{project.focus}</dd></div><div><dt>Tools</dt><dd>{project.technologies.join(", ")}</dd></div>{project.status && <div><dt>Status</dt><dd>{project.status}</dd></div>}</dl>
               <div className="project-links">{project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer">Visit ↗<span className="sr-only"> {project.name} (opens in a new tab)</span></a>}{project.githubUrl && <a href={project.githubUrl} target="_blank" rel="noreferrer">Source ↗<span className="sr-only"> (opens in a new tab)</span></a>}{project.caseStudyUrl && <a href={project.caseStudyUrl}>Case study →</a>}</div>
@@ -34,10 +34,10 @@ export default function ProjectIndex({ projects }: { projects: Project[] }) {
     </div>
     <div className="project-preview" aria-hidden="true">
       <div className={`project-preview-stage ${preview ? "has-preview" : ""}`}>
-        {projects.map((project) => <div key={project.id} className={`preview-layer ${preview?.id === project.id ? "is-visible" : ""}`}><ProjectVisual project={project} /></div>)}
+        {projects.map((project) => <div key={project.id} className={`preview-layer ${preview?.id === project.id ? "is-visible" : ""}`}><ProjectVisual project={project} active={preview?.id === project.id} /></div>)}
         <span className="preview-placeholder">Select a project to look closer.</span>
       </div>
-      <div className="preview-caption"><span>{preview ? preview.name : "Selected work"}</span><span>{preview ? preview.category : "01 — 04"}</span></div>
+      <div className="preview-caption"><span>{preview ? preview.name : "Selected work"}</span><span>{preview ? preview.category : `01 — ${String(projects.length).padStart(2, "0")}`}</span></div>
     </div>
   </div>;
 }

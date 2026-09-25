@@ -90,6 +90,17 @@ a { text-decoration: none; }
 .evidence-stack span { color: rgb(var(--text-muted)); }
 .evidence-stack p { margin: 0; }
 .evidence-stack b { font-weight: 400; }
+.preview-screens { display: flex; flex-direction: column; background: rgb(var(--surface)); }
+.screens-window { flex: 1; min-height: 0; display: flex; flex-direction: column; margin-top: clamp(14px, 2.2vw, 26px); border: 1px solid rgb(var(--line)); background: rgb(var(--canvas)); }
+.screens-bar { display: flex; align-items: center; gap: 5px; padding: 7px 10px; border-bottom: 1px solid rgb(var(--line)); }
+.screens-bar i { width: 6px; height: 6px; border-radius: 50%; background: rgb(var(--line)); }
+.screens-bar span { margin-left: 8px; color: rgb(var(--text-muted)); font-size: .55rem; letter-spacing: .04em; }
+.screens-viewport { position: relative; flex: 1; overflow: hidden; }
+.screens-viewport img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; opacity: 0; transform: scale(1.015); transition: opacity .5s ease, transform 2.4s ease; }
+.screens-viewport img.is-current { opacity: 1; transform: scale(1); }
+.screens-dots { display: flex; gap: 6px; padding-top: 12px; }
+.screens-dots span { width: 16px; height: 2px; background: rgb(var(--line)); transition: background .3s; }
+.screens-dots span.is-current { background: rgb(var(--accent)); }
 .preview-vision { background: rgb(var(--surface)); }
 .vision-frame { position: relative; display: grid; place-items: center; height: 74%; margin: 6% auto 0; width: 84%; background: rgb(var(--canvas)); }
 .vision-corner { position: absolute; width: 18px; height: 18px; border-color: rgb(var(--accent)); border-style: solid; }
