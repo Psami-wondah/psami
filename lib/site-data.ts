@@ -8,6 +8,7 @@ export type Project = {
   focus: string;
   technologies: string[];
   visual?: "koinovera" | "vision" | "skye-health" | "copyyt";
+  screenshots?: { src: string; label: string }[];
   status?: string;
   liveUrl?: string;
   githubUrl?: string;
@@ -52,6 +53,25 @@ export const projects: Project[] = [
     role: "Founder / Engineer", focus: "Product design, frontend, backend APIs, and search-assisted evidence tooling.",
     technologies: ["React", "NestJS", "PostgreSQL"], visual: "koinovera", status: "Live",
     liveUrl: "https://koinovera.com/",
+    screenshots: [
+      { src: "/projects/koinovera/home.jpg", label: "Home" },
+      { src: "/projects/koinovera/claim.jpg", label: "Claim" },
+      { src: "/projects/koinovera/category.jpg", label: "Category" },
+      { src: "/projects/koinovera/create-claim.jpg", label: "Create claim" },
+    ],
+  },
+  {
+    id: "ph-otakus", name: "PH Otakus", category: "Community platform / Open source", year: "2026",
+    summary: "The web platform for the Port Harcourt otaku community: events and RSVPs, member profiles, gallery archives and community stories.",
+    role: "Engineer", focus: "Member profiles and directory, event RSVPs with Otaku Passport badges, Google sign-in, R2 media uploads, and an admin CMS.",
+    technologies: ["Next.js", "Prisma", "PostgreSQL", "Auth.js", "Cloudflare R2"], status: "Live",
+    liveUrl: "https://ph.otaku.ng/", githubUrl: "https://github.com/otaku-ng/portharcourt",
+    screenshots: [
+      { src: "/projects/ph-otakus/home.jpg", label: "Home" },
+      { src: "/projects/ph-otakus/events.jpg", label: "Events" },
+      { src: "/projects/ph-otakus/community.jpg", label: "Community" },
+      { src: "/projects/ph-otakus/blog.jpg", label: "Stories" },
+    ],
   },
   {
     id: "vision-display", name: "Vision Display", category: "Assistive computing / Research", year: "2026",
@@ -65,6 +85,12 @@ export const projects: Project[] = [
     role: "Software engineer", focus: "Procedure-specific outcome collection, care timelines, and clinical data presentation.",
     technologies: ["FHIR", "SNOMED CT", "Analytics"], visual: "skye-health", status: "Live",
     liveUrl: "https://skyehealth.net/",
+    screenshots: [
+      { src: "/projects/skye-health/home.jpg", label: "Home" },
+      { src: "/projects/skye-health/solution.jpg", label: "Clinician view" },
+      { src: "/projects/skye-health/how-it-works.jpg", label: "How it works" },
+      { src: "/projects/skye-health/benefits.jpg", label: "Benefits" },
+    ],
   },
   {
     id: "copyyt", name: "Copyyt", category: "Utility / Experiment", year: "2024",
@@ -72,6 +98,12 @@ export const projects: Project[] = [
     role: "Product engineer", focus: "A low-friction browser extension and cross-device text transfer.",
     technologies: ["Chrome Extension", "JavaScript", "Web APIs"], visual: "copyyt",
     liveUrl: "https://copyyt.com/", status: "Live",
+    screenshots: [
+      { src: "/projects/copyyt/home.jpg", label: "Home" },
+      { src: "/projects/copyyt/how-it-works.jpg", label: "How it works" },
+      { src: "/projects/copyyt/security.jpg", label: "Security" },
+      { src: "/projects/copyyt/sync-modes.jpg", label: "Sync modes" },
+    ],
   },
 ];
 
