@@ -16,7 +16,7 @@ export default function Home() {
   return <main id="main-content">
     <section className="home-hero site-container" aria-labelledby="home-title">
       <div className="hero-overline"><span>Personal index / 001</span><span>2026</span></div>
-      <div className="hero-content"><p className="micro-label">Samuel Owhondah · Software engineer</p><h1 id="home-title">A practice in building<br/><em>useful things.</em></h1><p className="hero-description">Products, tools and experiments made with care and curiosity.</p></div>
+      <div className="hero-content"><p className="micro-label">Okechukwu Samuel Owhondah · Software engineer</p><h1 id="home-title">A practice in building<br/><em>useful things.</em></h1><p className="hero-description">Products, tools and experiments made with care and curiosity.</p></div>
       <div className="hero-bottom"><nav className="hero-index" aria-label="Explore this page">{sections.map((section) => <a href={section.href} key={section.number}><span>{section.number}</span><strong>{section.label}</strong><span>↗</span></a>)}</nav><div className="hero-aside"><span>Northampton / UK</span><a href="#about">Currently open to selected work ↓</a></div></div>
     </section>
 
