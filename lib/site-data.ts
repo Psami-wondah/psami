@@ -48,6 +48,16 @@ export const navigation = [
 
 export const projects: Project[] = [
   {
+    id: "heynaija", name: "HeyNaija", category: "Social platform / Product", year: "2026",
+    summary: "A Nigeria-first discussion network connecting Nigerians at home and in the diaspora through public conversations, communities and chronological feeds, with a proposed path toward community ownership.",
+    role: "Founder / Engineer", focus: "Product design, full-stack development, passwordless sign-in, threaded conversations, moderation workflows and image processing.",
+    technologies: ["Next.js", "NestJS", "PostgreSQL", "Drizzle", "Ory Kratos", "Redis", "Cloudflare R2"], status: "Invite-only beta",
+    liveUrl: "https://heynaija.ng/",
+    screenshots: [
+      { src: "/projects/heynaija/home.jpg", label: "Early interface" },
+    ],
+  },
+  {
     id: "koinovera", name: "Koinovera", category: "Evidence platform / Product", year: "2026",
     summary: "A community-powered platform for collecting and evaluating evidence around claims and topics.",
     role: "Founder / Engineer", focus: "Product design, frontend, backend APIs, and search-assisted evidence tooling.",
