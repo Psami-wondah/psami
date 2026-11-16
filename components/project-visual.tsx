@@ -47,7 +47,7 @@ function ScreenshotVisual({ project, screenshots, active }: { project: Project; 
   return <div className="preview-art preview-screens" aria-hidden="true">
     <div className="preview-topline"><span>{project.name.toUpperCase()}</span><span>{screenshots[current].label}</span></div>
     <div className="screens-window">
-      <div className="screens-bar"><i /><i /><i /><span>{project.liveUrl?.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span></div>
+      <div className="screens-bar"><i /><i /><i /><span>{(project.liveUrl || project.githubUrl)?.replace(/^https?:\/\//, "").replace(/\/$/, "")}</span></div>
       <div className="screens-viewport">{screenshots.map((shot, index) => <Image key={shot.src} src={shot.src} alt="" fill sizes="(max-width: 900px) 100vw, 45vw" className={index === current ? "is-current" : ""} />)}</div>
     </div>
     <div className="screens-dots">{screenshots.map((shot, index) => <span key={shot.src} className={index === current ? "is-current" : ""} />)}</div>

@@ -48,11 +48,37 @@ export const navigation = [
 
 export const projects: Project[] = [
   {
+    id: "global-fund-data-explorer", name: "Global Fund Data Explorer", category: "Global health data / Client work (Zimmerman)",
+    summary: "The Global Fund's public platform for exploring global health investment, financial and programme-result data. I build its React and TypeScript frontend, including an interactive report builder that turns uploaded datasets into configurable charts and visual reports.",
+    role: "Frontend engineer", focus: "An interactive report builder with drag-and-drop blocks (dnd-kit), resizable layouts and columns, autosave with error recovery, an asset library and report preview. Reusable Apache ECharts and D3 components that build configurable charts from uploaded datasets. Auth0 sign-in, Strapi content with i18n, and Cypress end-to-end tests on critical workflows.",
+    technologies: ["React", "TypeScript", "MUI", "Apache ECharts", "D3", "dnd-kit", "Cypress"], status: "Live",
+    liveUrl: "https://data.theglobalfund.org/", githubUrl: "https://github.com/globalfund/data-explorer.client",
+    screenshots: [
+      { src: "/projects/global-fund/home.jpg", label: "Home" },
+      { src: "/projects/global-fund/pledges.jpg", label: "Pledges chart" },
+      { src: "/projects/global-fund/disbursements.jpg", label: "Sankey chart" },
+      { src: "/projects/global-fund/allocation.jpg", label: "Allocations" },
+    ],
+  },
+  {
+    id: "tend", name: "Tend", category: "Payment safety / Product", year: "2026",
+    summary: "A payment-safety app for older adults: unusual PayPal payments are authorised but held, so the people they trust can review and stop them before any money moves, and scams are refused outright.",
+    role: "Founder / Engineer", focus: "Next.js and React interfaces for the account holder and their trusted circle, PayPal authorise, capture and void flows with webhooks, AI-assisted screening of payment requests, and Vitest coverage of payment, session and wording logic.",
+    technologies: ["Next.js", "React 19", "TypeScript", "Drizzle", "PayPal APIs", "Vitest"],
+    githubUrl: "https://github.com/Psami-wondah/tend",
+    screenshots: [
+      { src: "/projects/tend/welcome.jpg", label: "Front page" },
+      { src: "/projects/tend/person.jpg", label: "Account holder" },
+      { src: "/projects/tend/person-plan.jpg", label: "Before you pay" },
+      { src: "/projects/tend/held-card.jpg", label: "Held payment" },
+    ],
+  },
+  {
     id: "heynaija", name: "HeyNaija", category: "Social platform / Product", year: "2026",
     summary: "A Nigeria-first discussion network connecting Nigerians at home and in the diaspora through public conversations, communities and chronological feeds, with a proposed path toward community ownership.",
-    role: "Founder / Engineer", focus: "Product design, full-stack development, passwordless sign-in, threaded conversations, moderation workflows and image processing.",
-    technologies: ["Next.js", "NestJS", "PostgreSQL", "Drizzle", "Ory Kratos", "Redis", "Cloudflare R2"], status: "Invite-only beta",
-    liveUrl: "https://heynaija.ng/",
+    role: "Founder / Engineer", focus: "Product design, the Next.js and React frontend, NestJS APIs, passwordless sign-in, threaded conversations, moderation workflows and image processing.",
+    technologies: ["Next.js", "React 19", "TypeScript", "Tailwind CSS", "NestJS", "PostgreSQL", "Drizzle", "Ory Kratos", "Playwright"], status: "Invite-only beta",
+    liveUrl: "https://heynaija.ng/", githubUrl: "https://github.com/HeyNaija/heynaija",
     screenshots: [
       { src: "/projects/heynaija/home.jpg", label: "Early interface" },
     ],
@@ -119,7 +145,6 @@ export const projects: Project[] = [
 ];
 
 export const professionalProjects: Project[] = [
-  { id: "global-fund-data-explorer", name: "Global Fund Data Explorer", category: "Global health data / Zimmerman", summary: "A platform for exploring global health investment, financial and programme-result data, with an interactive report builder.", role: "Frontend engineer", focus: "Report-builder layouts, drag-and-drop blocks, configurable ECharts and D3 visualisations, asset library and autosave reliability.", technologies: ["React", "TypeScript", "ECharts", "D3", "dnd-kit"], liveUrl: "https://data.theglobalfund.org/" },
   { id: "health-anchor", name: "Health Anchor", category: "Healthtech", summary: "A digital pathway platform for clinical appointment booking and referrals.", role: "Software engineer", focus: "Booking, reporting, EHR interoperability, and APIs.", technologies: ["Care pathways", "FHIR", "APIs"], liveUrl: "https://healthanchor.co.uk/" },
   { id: "talnts", name: "Talnts", category: "Edtech / Techsemester", summary: "A platform for learning in-demand skills from creators through courses, cohorts and events, and earning from your own knowledge.", role: "Full-stack engineer", focus: "Google and password authentication, Firebase Cloud Messaging notifications, Recoil state, and Dockerised microservices on AWS EC2.", technologies: ["React", "Django", "Firebase", "Docker", "AWS"], liveUrl: "https://www.talnts.app/" },
 ];
